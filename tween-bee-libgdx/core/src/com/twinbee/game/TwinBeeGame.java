@@ -7,25 +7,28 @@ import com.badlogic.gdx.utils.ScreenUtils;
 
 public class TwinBeeGame extends ApplicationAdapter {
 	SpriteBatch batch;
-	Texture img;
+	//criação do fundo do tipo Texture
+	Texture background;
 	
 	@Override
+	//é importante lembrar que o create é como se fosse o construtor
 	public void create () {
 		batch = new SpriteBatch();
-		img = new Texture("badlogic.jpg");
+	}
+
+	public void execute(){
+		
 	}
 
 	@Override
 	public void render () {
 		ScreenUtils.clear(1, 0, 0, 1);
 		batch.begin();
-		batch.draw(img, 0, 0);
 		batch.end();
 	}
 	
 	@Override
 	public void dispose () {
 		batch.dispose();
-		img.dispose();
 	}
 }
