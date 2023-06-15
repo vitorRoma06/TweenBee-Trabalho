@@ -19,14 +19,20 @@ public class Actor {
     void execute() {
         
     }
-
     
     void run() {
         execute();
-        
+        //mecanismo para a nave não sair da tela
+        sprite.setX(clamp(sprite.getX(), 0, game.w - sprite.getWidth()));
     }
 
     void draw(SpriteBatch batch) {
         sprite.draw(batch);
+    }
+
+    static float clamp(float value, float min, float max){
+        if(value <min) return min;
+        if(value > max) return max;
+        return value;
     }
 }

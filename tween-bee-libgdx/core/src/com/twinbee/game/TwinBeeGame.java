@@ -1,5 +1,8 @@
 package com.twinbee.game;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
@@ -10,9 +13,15 @@ public class TwinBeeGame extends ApplicationAdapter {
     public SpriteBatch batch; // O SpriteBatch lida com o desenho de imagens 2D
     Texture background; // Textura para a imagem de fundo
     Background bk; // Objeto Background para gerenciar o plano de fundo em movimento
-    Ship ship; // Objeto Ship (nave)
+    Actor ship; // Objeto Actor (nave)
     Texture textureShip; // Textura para a imagem da nave
     int w, h; // Largura e altura da tela do jogo
+    Random rand = new Random();
+    int enemyCounter = 0;
+    int enemyMax = 50;
+    List<Actor> actors = new ArrayList<Actor>(); //ArrayList de atores (nave e inimigos)
+    Texture textureEnemy; 
+
 	
 
     @Override
@@ -24,14 +33,18 @@ public class TwinBeeGame extends ApplicationAdapter {
 
         background = new Texture("background.png"); // Carrega a imagem de fundo
         textureShip = new Texture("ship.png"); // Carrega a imagem da nave
+        textureEnemy = new Texture("enemy.png");
 
         bk = new Background(background); // Cria o objeto Background
-        ship = new Ship(w / 2f - textureShip.getWidth() / 2f, 10, textureShip, this); // Cria o objeto Ship na metade da tela
+        actors.add (new Ship(w / 2f - textureShip.getWidth() / 2f, 10, textureShip, this)); // Cria o objeto Ship na metade da tela
     }
 
     public void execute() {
         bk.run(); // Atualiza o movimento do plano de fundo
-        ship.run(); // Executa a lógica relacionada à nave 
+        for(Actor a: actors){
+            a.execute();
+        } 
+        enemyCreator();
     }
 
     @Override
@@ -42,7 +55,7 @@ public class TwinBeeGame extends ApplicationAdapter {
 
         batch.begin(); // Inicia o desenho
         bk.draw(batch); // Desenha o plano de fundo
-        ship.draw(batch); // Desenha a nave
+        for(Actor a : actors) a.draw(batch);
         batch.end(); // Encerra o desenho
 
         // O código acima desenha o plano de fundo e a nave na tela
@@ -51,10 +64,20 @@ public class TwinBeeGame extends ApplicationAdapter {
 		// Caso a ordem seja invertida, o fundo será desenhado em cima da nave prejudicando o funcionamento do jogo
     }
 
+    void enemyCreator(){
+        enemyCounter++;
+        if(enemyCounter > enemyMax){
+            actors.add(new Enemy(rand.nextInt(w - textureEnemy.getWidth()), h + 50, textureEnemy, this));
+            enemyCounter = 0;
+            enemyMax = 30 + rand.nextInt(50);
+        }  
+    }
+
     @Override
     public void dispose() {
         background.dispose(); // Libera a memória da textura de fundo
         textureShip.dispose(); // Libera a memória da textura da nave
+        textureEnemy.dispose();
         batch.dispose(); // Libera a memória do SpriteBatch
     }
 }
