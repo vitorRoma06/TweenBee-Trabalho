@@ -13,6 +13,7 @@ public class TwinBeeGame extends ApplicationAdapter {
     Ship ship; // Objeto Ship (nave)
     Texture textureShip; // Textura para a imagem da nave
     int w, h; // Largura e altura da tela do jogo
+	
 
     @Override
 	//É importante lembrar que o create é como se fosse um construtor
@@ -30,7 +31,7 @@ public class TwinBeeGame extends ApplicationAdapter {
 
     public void execute() {
         bk.run(); // Atualiza o movimento do plano de fundo
-        ship.execute(); // Executa a lógica relacionada à nave 
+        ship.run(); // Executa a lógica relacionada à nave 
     }
 
     @Override

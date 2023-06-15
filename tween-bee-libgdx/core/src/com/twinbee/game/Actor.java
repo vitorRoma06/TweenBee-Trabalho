@@ -8,6 +8,7 @@ public class Actor {
     TwinBeeGame game;
     Sprite sprite;
     boolean dead = false;
+    float gravity = 0.5f;
 
     Actor(float x, float y, Texture texture, TwinBeeGame game) {
         this.game = game;
@@ -16,11 +17,13 @@ public class Actor {
     }
 
     void execute() {
-        // to implement
+        
     }
 
+    
     void run() {
         execute();
+        
     }
 
     void draw(SpriteBatch batch) {
