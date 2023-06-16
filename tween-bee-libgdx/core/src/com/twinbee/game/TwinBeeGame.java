@@ -73,6 +73,13 @@ public class TwinBeeGame extends ApplicationAdapter {
         }  
     }
 
+    void limpar_lista(){
+        List<Actor> aux = actors;
+        actors = new ArrayList<Actor>();
+        for(Actor a : aux) if (!a.dead) actors.add(a);
+
+    }
+
     @Override
     public void dispose() {
         background.dispose(); // Libera a memória da textura de fundo

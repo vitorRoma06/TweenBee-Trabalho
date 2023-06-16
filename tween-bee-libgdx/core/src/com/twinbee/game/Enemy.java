@@ -5,10 +5,11 @@ import com.badlogic.gdx.graphics.Texture;
 public class Enemy extends Actor{
     static final int RIGHT = 0;
     static final int LEFT = 1;
-    int direcao = RIGHT;
+    int direcao = game.rand.nextInt(2);
 
     Enemy(float x, float y, Texture texture, TwinBeeGame game) {
         super(x, y, texture, game);
+        direcao = game.rand.nextInt(2);
     }
 
     @Override
@@ -24,6 +25,9 @@ public class Enemy extends Actor{
             if(sprite.getX() < 0){
                 direcao = RIGHT;
             }
+        }
+        if(sprite.getY() + sprite.getHeight()<0){
+            dead = true;
         }
     }
     
