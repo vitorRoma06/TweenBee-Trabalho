@@ -46,8 +46,8 @@ public class TwinBeeJogo extends ApplicationAdapter {
 		batch.begin();
 		bk.draw(batch);
 		bk.run();
-		player.draw(batch);
 		tiro.draw(batch);
+		player.draw(batch);
 		batch.end();
 		
 	}
