@@ -22,6 +22,7 @@ public class GameScreen extends ApplicationAdapter implements Screen {
     Background bk;
     Movel player;
     Projeteis tiro;
+    Movel alien;
 
     int larg, alt;
     float tempo = 0;
@@ -33,9 +34,10 @@ public class GameScreen extends ApplicationAdapter implements Screen {
         bk = new Background(background);
         nave = new Texture("nave.png");
         tiro1 = new Texture("tiro1.png");
+        alien1 = new Texture("alien1.png");
         tiro = new Projeteis(tiro1, batch);
         player = new Player(nave, tiro1, tiro);
-
+        alien = new Alien(alien1, 0, 1, 500);
     }
 
     @Override
@@ -44,6 +46,7 @@ public class GameScreen extends ApplicationAdapter implements Screen {
 		bk.draw(batch);
 		bk.run();
 		tiro.draw(batch);
+        alien.draw(batch);
 		player.draw(batch);
 		batch.end();
     }

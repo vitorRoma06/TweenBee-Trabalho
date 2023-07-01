@@ -11,14 +11,19 @@ public class Alien extends Movel {
     private Texture sprite;
 
     private int tipo;
-    private int veloc;
+    private int velX;
+    private int velY;
 
-    public Alien(Texture sprite, int tipo) {
+    public Alien(Texture sprite, int tipo,int posX,int posY) {
         this.sprite = sprite;
         if(tipo == 0){
-            veloc = 1;
+            velX = 3;
+            velY = 3;
         }
         vida = 1;
+        this.posX = posX;
+        this.posY = posY;
+        morto = false;
     }
 
     @Override
@@ -26,9 +31,12 @@ public class Alien extends Movel {
         if (morto == false) {
             switch (tipo) {
                 case 0:
-                if(posX > 799 || posX < 0){
-                veloc = veloc * (-1);    
-                }posX = posX + veloc;
+                if((posX+50) > 799 || posX < 0){
+                velX = velX * (-1);    
+                }posX = posX + velX;
+                if((posY+50) > 599 || posY < 400){
+                velY = velY * (-1);    
+                }posY = posY + velY;
                     break;
                 case 1:
                     break;
@@ -38,7 +46,7 @@ public class Alien extends Movel {
                     break;
             }
         }
-        batch.draw(sprite, posX, posY);
+        batch.draw(sprite, posX, posY,50, 50);
     }
 
 }
