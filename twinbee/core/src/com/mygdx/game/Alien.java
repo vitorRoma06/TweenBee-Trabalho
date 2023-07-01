@@ -1,4 +1,4 @@
-/*package com.mygdx.game;
+package com.mygdx.game;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -11,9 +11,14 @@ public class Alien extends Movel {
     private Texture sprite;
 
     private int tipo;
+    private int veloc;
 
     public Alien(Texture sprite, int tipo) {
         this.sprite = sprite;
+        if(tipo == 0){
+            veloc = 1;
+        }
+        vida = 1;
     }
 
     @Override
@@ -21,8 +26,9 @@ public class Alien extends Movel {
         if (morto == false) {
             switch (tipo) {
                 case 0:
-                
-                    posX = posX + 1
+                if(posX > 799 || posX < 0){
+                veloc = veloc * (-1);    
+                }posX = posX + veloc;
                     break;
                 case 1:
                     break;
@@ -30,10 +36,9 @@ public class Alien extends Movel {
                     break;
                 default:
                     break;
-
             }
         }
         batch.draw(sprite, posX, posY);
     }
 
-}*/
+}
