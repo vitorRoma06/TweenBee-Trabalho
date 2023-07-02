@@ -48,6 +48,7 @@ public class GameScreen extends ApplicationAdapter implements Screen {
 		tiro.draw(batch);
         alien.draw(batch);
 		player.draw(batch);
+        alien.posicaoIgual(tiro.getPosX(), tiro.getPosY());
 		batch.end();
     }
 

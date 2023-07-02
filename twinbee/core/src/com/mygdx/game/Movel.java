@@ -5,10 +5,10 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 
-import java.awt.*;    
-import java.awt.event.*;    
+import java.awt.*;
+import java.awt.event.*;
 
-public class Movel{
+public class Movel {
     private int posX;
     private int posY;
     private int vida;
@@ -16,27 +16,33 @@ public class Movel{
     private Texture sprite;
     TwinBeeJogo game;
 
-
-    public void posicaoIgual(int posX1, int posY1){
-        if(posX == posX1 && posY1 == posY){
-            dano();
+    public void posicaoIgual(int posX1, int posY1) {
+        for (int i = 0; i < sprite.getWidth(); i++) {
+            for (i = 0; i < sprite.getHeight(); i++){
+                if ((posX == posX1) && (posY1 == posY+i)) {
+                dano();
+            }
+            }
+            if ((posX == posX1+i) && (posY1 == posY)) {
+                dano();
+            }
         }
     }
 
-    public void dano(){
+    public void dano() {
         vida--;
-        if(vida == 0){
+        if (vida < 1) {
             morto = true;
             posX = 2000;
             posY = 2000;
         }
     }
 
-    public void draw(SpriteBatch batch){
-        if(morto = false){
+    public void draw(SpriteBatch batch) {
+        if (morto = false) {
             batch.draw(sprite, posX, posY);
         }
-        
+
     }
-    
+
 }

@@ -47,4 +47,14 @@ public class Projeteis extends Movel {
         this.morto = morto;
     }
 
+    public int getPosX() {
+        return posX;
+    }
+
+    public int getPosY() {
+        return posY;
+    }
+
+    
+
 }
