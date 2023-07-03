@@ -48,7 +48,6 @@ public class GameScreen extends ApplicationAdapter implements Screen {
         batch = new SpriteBatch();
         background = new Texture("background.png");
         // Inicializando a fonte para a tela de menu
-        font = new BitmapFont();
         bk = new Background(background);
 
         // Inicializando os botões

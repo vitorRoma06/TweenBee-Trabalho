@@ -23,7 +23,6 @@ public class CreditosScreen extends ApplicationAdapter implements Screen {
     SpriteBatch batch;
     Background bk;
 
-    private BitmapFont font;
     private String creditsTitle = "Creditos";
     private String namesText = "Alanderson Figueiredo de Lima\nHenrique Giberti Pilo Fernandes\nVitor de Roma Honorio";
     private String referencesTitle = "Referencias";
@@ -38,17 +37,15 @@ public class CreditosScreen extends ApplicationAdapter implements Screen {
         batch = new SpriteBatch();
         background = new Texture("background.png");
         bk = new Background(background);
-        font = new BitmapFont(Gdx.files.internal("consolas.fnt"), Gdx.files.internal("consolas.png"), false);
     }
 
     @Override
     public void show() {
         stage = new Stage();
         Gdx.input.setInputProcessor(stage);
-
         skin = new Skin();
         TextButton.TextButtonStyle buttonStyle = new TextButton.TextButtonStyle();
-        buttonStyle.font = font;
+        buttonStyle.font = game.font;
 
         Texture buttonTexture = new Texture("voltar-left.png");
         buttonStyle.up = new Image(buttonTexture).getDrawable();
@@ -77,27 +74,31 @@ public class CreditosScreen extends ApplicationAdapter implements Screen {
         bk.draw(batch);
         bk.run();
 
-        font.getRegion().getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        game.font.getRegion().getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
         // Desenha o título "Créditos"
-        font.getData().setScale(2);
-        font.setColor(1, 1, 1, 1);
-        font.draw(batch, creditsTitle, 0, Gdx.graphics.getHeight() - 50, Gdx.graphics.getWidth(), Align.center, false);
+        game.font.getData().setScale(2);
+        game.font.setColor(1, 1, 1, 1);
+        game.font.draw(batch, creditsTitle, 0, Gdx.graphics.getHeight() - 50, Gdx.graphics.getWidth(), Align.center,
+                false);
 
         // Desenha os nomes
-        font.getData().setScale(1.5f);
-        font.setColor(1, 1, 1, 1);
-        font.draw(batch, namesText, 50, Gdx.graphics.getHeight() - 150, Gdx.graphics.getWidth() - 100, Align.left, true);
+        game.font.getData().setScale(1.5f);
+        game.font.setColor(1, 1, 1, 1);
+        game.font.draw(batch, namesText, 50, Gdx.graphics.getHeight() - 150, Gdx.graphics.getWidth() - 100, Align.left,
+                true);
 
         // Desenha o título "Referências"
-        font.getData().setScale(2);
-        font.setColor(1, 1, 1, 1);
-        font.draw(batch, referencesTitle, 0, Gdx.graphics.getHeight() - 350, Gdx.graphics.getWidth(), Align.center, false);
+        game.font.getData().setScale(2);
+        game.font.setColor(1, 1, 1, 1);
+        game.font.draw(batch, referencesTitle, 0, Gdx.graphics.getHeight() - 350, Gdx.graphics.getWidth(), Align.center,
+                false);
 
         // Desenha as referências
-        font.getData().setScale(1.5f);
-        font.setColor(1, 1, 1, 1);
-        font.draw(batch, referencesText, 50, Gdx.graphics.getHeight() - 450, Gdx.graphics.getWidth() - 100, Align.left, true);
+        game.font.getData().setScale(1.5f);
+        game.font.setColor(1, 1, 1, 1);
+        game.font.draw(batch, referencesText, 50, Gdx.graphics.getHeight() - 450, Gdx.graphics.getWidth() - 100,
+                Align.left, true);
 
         batch.end();
 
@@ -114,7 +115,7 @@ public class CreditosScreen extends ApplicationAdapter implements Screen {
     public void dispose() {
         batch.dispose();
         background.dispose();
-        font.dispose();
+        game.font.dispose();
         skin.dispose();
         stage.dispose();
     }
