@@ -3,36 +3,31 @@ package com.mygdx.game;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-
 public class Projeteis extends Movel {
-    private int posX;
-    private int posY;
-    private int vida;
-    private boolean morto;
-    private Texture sprite;
+    private float scale;
 
-    public Projeteis(Texture sprite, SpriteBatch batch) {
+    public Projeteis(Texture sprite, SpriteBatch batch, float scale) {
         posY = 599;
         vida = 1;
         morto = false;
         this.sprite = sprite;
+        this.scale = scale;
     }
 
     public void setPos(int posOriX, int posOriY, int alt, int larg) {
-        posX = posOriX + larg/2;
-        posY = posOriY + alt;
+        posX = posOriX + larg/2 - 20; // Ajusta a posição horizontal do projétil
+        posY = posOriY + alt - 30;
     }
 
     @Override
     public void draw(SpriteBatch batch) {
         if (morto == false) {
-            posY = posY + 7;
-            batch.draw(sprite, posX, posY, 20, 20);
-            if(posY > 600){
+            posY = posY + 15;
+            batch.draw(sprite, posX, posY, 20 * scale, 20 * scale);
+            if (posY > 600) {
                 morto = true;
             }
         }
-
     }
 
     public boolean isMorto() {
@@ -50,7 +45,4 @@ public class Projeteis extends Movel {
     public int getPosY() {
         return posY;
     }
-
-    
-
 }

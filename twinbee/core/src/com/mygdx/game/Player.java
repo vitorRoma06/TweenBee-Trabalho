@@ -6,11 +6,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 
 public class Player extends Movel {
-    private int posX;
-    private int posY;
-    private int vida;
-    private boolean morto;
-    private Texture sprite;
+
     private Texture tiro1Sprite;
 
     Projeteis tiro;

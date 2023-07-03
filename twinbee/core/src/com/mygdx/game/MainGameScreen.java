@@ -12,19 +12,20 @@ public class MainGameScreen extends ApplicationAdapter implements Screen {
 
     final TwinBeeJogo game;
 
-    Texture background;
-    Texture nave;
-    Texture tiro1;
-    Texture alien1;
+    private Texture background;
+    private Texture nave;
+    private Texture tiro1;
+    private Texture alien1;
 
     public SpriteBatch batch;
-    Background bk;
-    Movel player;
-    Projeteis tiro;
-    Movel alien;
+    private Background bk;
+    private Movel player;
+    private Projeteis tiro;
+    private Movel alien;
 
     int larg, alt;
     float tempo = 0;
+    float scale = 2; 
 
     public MainGameScreen(TwinBeeJogo game) {
         this.game = game;
@@ -32,11 +33,12 @@ public class MainGameScreen extends ApplicationAdapter implements Screen {
         background = new Texture("background.png");
         bk = new Background(background);
         nave = new Texture("nave.png");
-        tiro1 = new Texture("tiro1.png");
+        tiro1 = new Texture("tiro22.png");
         alien1 = new Texture("alien1.png");
-        tiro = new Projeteis(tiro1, batch);
+        tiro = new Projeteis(tiro1, batch, scale);
         player = new Player(nave, tiro1, tiro);
-        alien = new Alien(alien1, 0, 1, 500);
+        alien = new Alien(alien1, 0, Gdx.graphics.getWidth());
+
     }
 
     @Override

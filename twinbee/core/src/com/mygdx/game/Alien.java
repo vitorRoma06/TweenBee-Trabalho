@@ -1,28 +1,26 @@
 package com.mygdx.game;
 
+import java.util.Random;
+
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class Alien extends Movel {
-    private int posX;
-    private int posY;
-    private int vida;
-    private boolean morto;
-    private Texture sprite;
 
     private int tipo;
     private int velX;
     private int velY;
 
-    public Alien(Texture sprite, int tipo, int posX, int posY) {
+    public Alien(Texture sprite, int tipo, int screenWidth) {
         this.sprite = sprite;
         if (tipo == 0) {
             velX = 3;
             velY = 3;
         }
         vida = 1;
-        this.posX = posX;
-        this.posY = posY;
+        Random random = new Random();
+        posX = random.nextInt(screenWidth - sprite.getWidth()); // Posição aleatória dentro da largura da tela
+        posY = 500; // Posicionado no topo da tela
         morto = false;
     }
 
@@ -57,10 +55,12 @@ public class Alien extends Movel {
             for (i = 0; i < sprite.getHeight(); i++) {
                 if ((posX == posX1) && (posY1 == posY + i)) {
                     dano();
+                    return; // Sai do método se o projétil atingir o alien
                 }
             }
             if ((posX == posX1 + i) && (posY1 == posY)) {
                 dano();
+                return; // Sai do método se o projétil atingir o alien
             }
         }
     }

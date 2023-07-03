@@ -10,7 +10,6 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.utils.Timer;
@@ -21,7 +20,7 @@ public class GameScreen extends ApplicationAdapter implements Screen {
 
     private SpriteBatch batch;
     private Texture background;
-    Background bk;
+    private Background bk;
 
     // Variáveis para a tela de menu
     private BitmapFont font;
@@ -32,7 +31,6 @@ public class GameScreen extends ApplicationAdapter implements Screen {
     private TextButton playButton;
     private TextButton creditsButton;
     private TextButton quitButton;
-    private Skin skin;
 
     // Variável para o som do botão
     private Sound buttonSound;
@@ -57,7 +55,6 @@ public class GameScreen extends ApplicationAdapter implements Screen {
         stage = new Stage();
         Gdx.input.setInputProcessor(stage);
 
-        skin = new Skin();
         TextButtonStyle buttonStyle = new TextButtonStyle();
         buttonStyle.font = font;
 
@@ -65,17 +62,15 @@ public class GameScreen extends ApplicationAdapter implements Screen {
         Texture buttonTexture = new Texture("button.png");
         buttonStyle.up = new Image(buttonTexture).getDrawable();
 
-        skin.add("default", buttonStyle);
-
-        playButton = new TextButton("Jogar", skin);
+        playButton = new TextButton("Jogar", buttonStyle);
         playButton.setPosition(Gdx.graphics.getWidth() / 2 - playButton.getWidth() / 2,
                 Gdx.graphics.getHeight() / 2 - playButton.getHeight() / 2 - 50);
 
-        creditsButton = new TextButton("Créditos", skin);
+        creditsButton = new TextButton("Créditos", buttonStyle);
         creditsButton.setPosition(Gdx.graphics.getWidth() / 2 - creditsButton.getWidth() / 2,
                 Gdx.graphics.getHeight() / 2 - creditsButton.getHeight() / 2 - 100);
 
-        quitButton = new TextButton("Sair", skin);
+        quitButton = new TextButton("Sair", buttonStyle);
         quitButton.setPosition(Gdx.graphics.getWidth() / 2 - quitButton.getWidth() / 2,
                 Gdx.graphics.getHeight() / 2 - quitButton.getHeight() / 2 - 150);
 
@@ -158,7 +153,6 @@ public class GameScreen extends ApplicationAdapter implements Screen {
         background.dispose();
         font.dispose();
         stage.dispose();
-        skin.dispose();
         buttonSound.dispose();
     }
 
