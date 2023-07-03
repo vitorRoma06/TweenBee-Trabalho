@@ -29,7 +29,8 @@ public class MainGameScreen extends ApplicationAdapter implements Screen {
     private Movel player;
     private Projeteis tiro;
     private Movel alien;
-    Alien aliens[] = new Alien[10];
+    private Alien aliens[] = new Alien[10];
+    private Projeteis tiros[] = new Projeteis[10];
 
     Random rand = new Random();
     private BitmapFont font;
@@ -56,10 +57,10 @@ public class MainGameScreen extends ApplicationAdapter implements Screen {
         alien2 = new Texture("alien2.png");
         alien3 = new Texture("alien3.png");
         tiro = new Projeteis(tiro1, batch, scale);
-        player = new Player(nave, tiro1, tiro);
-        alien = new Alien(alien1, alien2, alien3);
+        player = new Player(nave, tiro);
         for (int i = 0; i < 10; i++) {
-            aliens[i] = new Alien(alien1, alien2, alien3);
+            tiros[i] = new Projeteis(tiro1, batch, scale);
+            aliens[i] = new Alien(alien1, alien2, alien3, tiros[i]);
         }
         font = new BitmapFont();
         temp = TimeUtils.nanoTime() / 1000000000;
@@ -75,7 +76,6 @@ public class MainGameScreen extends ApplicationAdapter implements Screen {
         font.draw(batch, "Vida: " + player.vida, 30, 520);
         font.draw(batch, "Tempo: " + (TimeUtils.nanoTime() / 1000000000 - temp), 700, 550);
         tiro.draw(batch);
-        alien.draw(batch);
         player.draw(batch);
 
         mortos = 0;
@@ -97,9 +97,13 @@ public class MainGameScreen extends ApplicationAdapter implements Screen {
             tempo = 0;
         }
 
-        // olha posições iguais
+        // olha posições iguais e draw alien e tiros
         for (int i = 0; i < 10; i++) {
             aliens[i].draw(batch);
+            if(aliens[i].getTipo() == 0) {
+                tiros[i].draw(batch);
+            }
+            
             if (aliens[i].posicaoIgual(tiro.getPosX(), tiro.getPosY(), 35, 35) == true) {
                 pont = pont + 100;
                 tiro.setMorto(true);
@@ -112,7 +116,6 @@ public class MainGameScreen extends ApplicationAdapter implements Screen {
             }
 
         }
-        alien.posicaoIgual(tiro.getPosX(), tiro.getPosY(),tiro.sprite.getHeight(),tiro.sprite.getWidth());
 
         // ve se player morreu
         if (!isGameOver) {

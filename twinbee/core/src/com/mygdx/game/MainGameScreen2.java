@@ -11,7 +11,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import java.util.Random;
 import com.badlogic.gdx.utils.TimeUtils;
 
-public class MainGameScreen2 extends ApplicationAdapter implements Screen{
+public class MainGameScreen2 extends ApplicationAdapter implements Screen {
     final TwinBeeJogo game;
 
     private Texture background;
@@ -26,21 +26,22 @@ public class MainGameScreen2 extends ApplicationAdapter implements Screen{
     private Background bk;
     private Movel player;
     private Projeteis tiro;
-    Alien aliens[] = new Alien[10];
+    private Alien aliens[] = new Alien[10];
+    private Movel tiros[] = new Projeteis[10];
     private Movel boss;
 
     Random rand = new Random();
     private BitmapFont font;
     private long temp;
 
-
     int larg, alt, mortos = 0;
     int posXs[] = new int[10];
     int posYs[] = new int[10];
     double tempo = 10;
-    float scale = 2; 
+    float scale = 2;
     int pont = 0;
     double cooldown = 0;
+    double bossCooldown = 0;
 
     public MainGameScreen2(TwinBeeJogo game) {
         this.game = game;
@@ -54,10 +55,10 @@ public class MainGameScreen2 extends ApplicationAdapter implements Screen{
         alien3 = new Texture("alien3.png");
         boss1 = new Texture("boss.png");
         tiro = new Projeteis(tiro1, batch, scale);
-        player = new Player(nave, tiro1, tiro);
+        player = new Player(nave, tiro);
         boss = new Boss(game, boss1);
         font = new BitmapFont();
-        temp = TimeUtils.nanoTime()/1000000000;
+        temp = TimeUtils.nanoTime() / 1000000000;
     }
 
     @Override
@@ -74,14 +75,19 @@ public class MainGameScreen2 extends ApplicationAdapter implements Screen{
         player.draw(batch);
 
         // olha posições iguais
-        for (int i = 0; i < 10; i++) {
-            if (TimeUtils.nanoTime() / 1000000000 > cooldown + 2) {
-                if (player.posicaoIgual(boss.getPosX(), boss.getPosY(), 180, 200) == true){
-                    cooldown = TimeUtils.nanoTime() / 1000000000;
-                }
+        if (TimeUtils.nanoTime() / 1000000000 > cooldown + 2) {
+            if (player.posicaoIgual(boss.getPosX(), boss.getPosY(), 100, 100) == true) {
+                cooldown = TimeUtils.nanoTime() / 1000000000;
             }
-
         }
+
+        if (TimeUtils.nanoTime() / 1000000000 > bossCooldown + 0.5) {
+            if (boss.posicaoIgual(tiro.getPosX(), tiro.getPosY(), 50, 50) == true) {
+                bossCooldown = TimeUtils.nanoTime() / 1000000000;
+                tiro.setMorto(true);
+            }
+        }
+
 
         // ve se player morreu
         if (player.isMorto() == true) {

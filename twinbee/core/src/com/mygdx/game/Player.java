@@ -7,20 +7,18 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class Player extends Movel {
 
-    private Texture tiro1Sprite;
 
     Projeteis tiro;
 
     private int powerup;
 
-    public Player(Texture sprite, Texture tiro1Sprite, Projeteis tiro) {
+    public Player(Texture sprite,  Projeteis tiro) {
         vida = 3;
         posX = 400;
         posY = 100;
         morto = false;
         this.sprite = sprite;
         powerup = 1;
-        this.tiro1Sprite = tiro1Sprite;
         this.tiro = tiro;
     }
 

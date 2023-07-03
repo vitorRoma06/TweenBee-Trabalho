@@ -27,7 +27,7 @@ public class Boss extends Movel{
         batch.draw(sprite, posX, posY, 200, 200);
         switch (fase) {
             case 0:
-            if(posX +200 > 799 || posX < 1){
+            if(posX + 200 > 799 || posX < 1){
                 velX = velX*-1;
             }
             posX = posX + velX;
@@ -37,6 +37,7 @@ public class Boss extends Movel{
             posY = posY + velY;
             break;
             case 1:
+            
             break;
             case 2:
             break;

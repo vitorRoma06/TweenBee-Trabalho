@@ -1,7 +1,10 @@
 package com.mygdx.game;
 
+import java.util.Random;
+
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.utils.TimeUtils;
 
 public class Alien extends Movel {
     private int vida;
@@ -11,17 +14,23 @@ public class Alien extends Movel {
     private int tipo;
     private int velX;
     private int velY;
+    private float cooldown;
 
-    public Alien(Texture sprite, Texture sprite2, Texture sprite1) {
+    Projeteis tiro;
+    Random rand = new Random();
+
+    public Alien(Texture sprite, Texture sprite2, Texture sprite1, Projeteis tiro) {
         this.sprite = sprite;
         this.sprite2 = sprite2;
         this.sprite1 = sprite1;
+        this.tiro = tiro;
         morto = true;
         vida = 1;
         posX = 0;
         posY = 0;
         velX = 5;
         velY = -5;
+        tiro.setAlien();
     }
 
     @Override
@@ -37,6 +46,14 @@ public class Alien extends Movel {
                         velY = velY * (-1);
                     }
                     posY = posY + velY;
+                    if (tiro.isMorto() == true && TimeUtils.nanoTime() / 1000000000> cooldown + 3 && rand.nextInt(80) == 0 ) {
+                        tiro.setMorto(false);
+                        tiro.setPos(posX, posY, sprite.getHeight(), sprite.getWidth());
+                        cooldown = (TimeUtils.nanoTime() / 1000000000);
+                    }
+                    if(tiro.posY < 0){
+                        tiro.setMorto(true);
+                    }
                     batch.draw(sprite, posX, posY, 50, 50);
                     break;
                 case 1:
@@ -66,7 +83,7 @@ public class Alien extends Movel {
                     break;
             }
         }
-        
+
     }
 
     @Override
@@ -94,8 +111,8 @@ public class Alien extends Movel {
 
     public void setTipo(int tipo) {
         this.tipo = tipo;
-        if(tipo == 1){
-            velX = velX*-1;
+        if (tipo == 1) {
+            velX = velX * -1;
         }
     }
 
@@ -120,7 +137,7 @@ public class Alien extends Movel {
     }
 
     @Override
-    public boolean isMorto(){
+    public boolean isMorto() {
         return morto;
     }
 
