@@ -27,11 +27,11 @@ public class Player extends Movel {
     public void draw(SpriteBatch batch) {
         if (Gdx.input.isKeyPressed(Input.Keys.W) && posY < (600 - sprite.getHeight())) {
             posY = posY + 5;
-        } else if (Gdx.input.isKeyPressed(Input.Keys.A) && posX > 0) {
+        }if (Gdx.input.isKeyPressed(Input.Keys.A) && posX > 0) {
             posX = posX - 5;
-        } else if (Gdx.input.isKeyPressed(Input.Keys.S) && posY > 0) {
+        }if (Gdx.input.isKeyPressed(Input.Keys.S) && posY > 0) {
             posY = posY - 5;
-        } else if (Gdx.input.isKeyPressed(Input.Keys.D) && posX < (800 - sprite.getWidth())) {
+        } if (Gdx.input.isKeyPressed(Input.Keys.D) && posX < (800 - sprite.getWidth())) {
             posX = posX + 5;
         }
 
