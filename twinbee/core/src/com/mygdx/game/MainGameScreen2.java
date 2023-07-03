@@ -25,6 +25,9 @@ public class MainGameScreen2 extends ApplicationAdapter implements Screen  {
     private Texture tiroAlien;
     private Texture tiroBoss;
 
+    private Texture red;
+    private Texture green;
+
     private Sound somTiro;
     private Sound morteNaveSound;
 
@@ -68,6 +71,8 @@ public class MainGameScreen2 extends ApplicationAdapter implements Screen  {
         boss1 = new Texture("boss.png");
         tiroAlien = new Texture("tiroAlien_1.png");
         tiroBoss = new Texture("tiroBoss.png");
+        red = new Texture("red.png");
+        green = new Texture("green.png");
 
         bk = new Background(background);
         tiro = new Projeteis(tiro1, batch, scale, somTiro);
@@ -91,6 +96,12 @@ public class MainGameScreen2 extends ApplicationAdapter implements Screen  {
         font.draw(batch, "Pontuação: " + pont, 30, 550);
         font.draw(batch, "Vida: " + player.vida, 30, 520);
         font.draw(batch, "Tempo: " + (TimeUtils.nanoTime() / 1000000000 - temp), 700, 550);
+        for(int i = 0; i < 30; i++){
+            batch.draw(green, 0+(i*5), 595,20,20);
+        }
+        for(int i = 0; i < boss.vida; i++){
+            batch.draw(red, 0+(i*5), 595,20,20);
+         }
         tiro.draw(batch);
         bossTiro.draw(batch);
         boss.draw(batch);
@@ -111,10 +122,10 @@ public class MainGameScreen2 extends ApplicationAdapter implements Screen  {
         }
 
         //boss
-        if(boss.vida == 40){
+        if(boss.vida == 20){
             ((Boss) boss).setFase(1);
         }
-        if(boss.vida == 20){
+        if(boss.vida == 10){
             ((Boss) boss).setFase(2);
         }
 

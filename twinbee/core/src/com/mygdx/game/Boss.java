@@ -18,7 +18,7 @@ public class Boss extends Movel {
         this.sprite = sprite;
         this.tiro = tiro;
         this.morto = false;
-        vida = 60;
+        vida = 30;
         velX = 5;
         velY = 5;
         fase = 0;
@@ -80,4 +80,6 @@ public class Boss extends Movel {
                 break;
         }
     }
+
+
 }

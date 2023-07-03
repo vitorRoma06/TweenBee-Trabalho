@@ -75,6 +75,14 @@ public class Movel {
         return false;
     }
 
+    public int getVida() {
+        return vida;
+    }
+
+    public void setVida(int vida) {
+        this.vida = vida;
+    }
+
     
 
 }
