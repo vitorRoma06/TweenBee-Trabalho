@@ -23,6 +23,7 @@ public class MainGameScreen2 extends ApplicationAdapter implements Screen  {
     private Texture alien3;
     private Texture boss1;
     private Texture tiroAlien;
+    private Texture tiroBoss;
 
     private Sound somTiro;
     private Sound morteNaveSound;
@@ -36,6 +37,7 @@ public class MainGameScreen2 extends ApplicationAdapter implements Screen  {
     private Alien aliens[] = new Alien[10];
     private Projeteis tiros[] = new Projeteis[10];
     private Movel boss;
+    private Movel bossTiro;
 
     Random rand = new Random();
     private BitmapFont font;
@@ -65,11 +67,13 @@ public class MainGameScreen2 extends ApplicationAdapter implements Screen  {
         alien3 = new Texture("alien3.png");
         boss1 = new Texture("boss.png");
         tiroAlien = new Texture("tiroAlien_1.png");
+        tiroBoss = new Texture("tiroBoss.png");
 
         bk = new Background(background);
         tiro = new Projeteis(tiro1, batch, scale, somTiro);
+        bossTiro = new Projeteis(tiroBoss, batch, scale*4, somTiro);
         player = new Player(nave, tiro);
-        boss = new Boss(game, boss1);
+        boss = new Boss(game, boss1, bossTiro);
         font = new BitmapFont();
         for (int i = 0; i < 10; i++) {
             tiros[i] = new Projeteis(tiroAlien, batch, scale, somTiro);
@@ -88,6 +92,7 @@ public class MainGameScreen2 extends ApplicationAdapter implements Screen  {
         font.draw(batch, "Vida: " + player.vida, 30, 520);
         font.draw(batch, "Tempo: " + (TimeUtils.nanoTime() / 1000000000 - temp), 700, 550);
         tiro.draw(batch);
+        bossTiro.draw(batch);
         boss.draw(batch);
         player.draw(batch);
 
@@ -103,6 +108,14 @@ public class MainGameScreen2 extends ApplicationAdapter implements Screen  {
                 bossCooldown = TimeUtils.nanoTime() / 1000000000;
                 tiro.setMorto(true);
             }
+        }
+
+        //boss
+        if(boss.vida == 40){
+            ((Boss) boss).setFase(1);
+        }
+        if(boss.vida == 20){
+            ((Boss) boss).setFase(2);
         }
 
 
