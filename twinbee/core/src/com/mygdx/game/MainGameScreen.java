@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import java.util.Random;
+import com.badlogic.gdx.utils.TimeUtils;
 
 public class MainGameScreen extends ApplicationAdapter implements Screen {
 
@@ -30,12 +31,15 @@ public class MainGameScreen extends ApplicationAdapter implements Screen {
 
     Random rand = new Random();
     private BitmapFont font;
+    private long Temp;
+
 
     int larg, alt, mortos = 0;
     int posXs[] = new int[10];
     int posYs[] = new int[10];
     float tempo = 0;
     float scale = 2; 
+    int pont = 0;
 
     public MainGameScreen(TwinBeeJogo game) {
         this.game = game;
@@ -54,15 +58,16 @@ public class MainGameScreen extends ApplicationAdapter implements Screen {
             aliens[i] = new Alien(alien1, alien2, alien3);
         }
         font = new BitmapFont();
+        Temp = TimeUtils.millis();
     }
 
     @Override
     public void render(float delta) {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.begin();
-        font.draw(batch, "Pontuação",30,550);
         bk.draw(batch);
         bk.run();
+        font.draw(batch, "Pontuação: "+ pont,30,550);
         tiro.draw(batch);
         mortos=0;
         for (int i = 0; i < 10; i++) {
@@ -82,7 +87,9 @@ public class MainGameScreen extends ApplicationAdapter implements Screen {
             }else {
                 aliens[i].draw(batch);
             }
-            aliens[i].posicaoIgual(tiro.getPosX(), tiro.getPosY());
+            if(aliens[i].posicaoIgual(tiro.getPosX(), tiro.getPosY()) == true) {
+                pont = pont + 100;
+            };
         }
 
         alien.draw(batch);
