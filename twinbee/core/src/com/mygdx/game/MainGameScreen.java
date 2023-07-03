@@ -4,6 +4,7 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -21,6 +22,7 @@ public class MainGameScreen extends ApplicationAdapter implements Screen {
     private Texture alien1;
     private Texture alien2;
     private Texture alien3;
+    private Music backgroundMusic;
 
     public SpriteBatch batch;
     private Background bk;
@@ -32,6 +34,8 @@ public class MainGameScreen extends ApplicationAdapter implements Screen {
     Random rand = new Random();
     private BitmapFont font;
     private long temp;
+
+    boolean isGameOver = false;
 
     int larg, alt, mortos = 0;
     int posXs[] = new int[10];
@@ -111,10 +115,21 @@ public class MainGameScreen extends ApplicationAdapter implements Screen {
         alien.posicaoIgual(tiro.getPosX(), tiro.getPosY(),tiro.sprite.getHeight(),tiro.sprite.getWidth());
 
         // ve se player morreu
-        if (player.isMorto() == true) {
-            game.setScreen(new MainGameScreen2(game));
+        if (!isGameOver) {
+            if (player.isMorto()) {
+                backgroundMusic.stop();
+                isGameOver = true;
+                game.setScreen(new CreditosScreen(game));
+            }
+        } else {
+            if (Gdx.input.justTouched()) {
+                isGameOver = false;
+                backgroundMusic.play();
+            }
         }
+
         batch.end();
+
     }
 
     @Override
@@ -137,10 +152,15 @@ public class MainGameScreen extends ApplicationAdapter implements Screen {
     public void dispose() {
         batch.dispose();
         background.dispose();
+        backgroundMusic.dispose();
     }
 
     @Override
     public void show() {
+        backgroundMusic = Gdx.audio.newMusic(Gdx.files.internal("sounds/music-start.mp3"));
+        backgroundMusic.setLooping(true); // Define a música para repetir
+        backgroundMusic.setVolume(0.5f);
+        backgroundMusic.play(); // Inicia a reprodução da música
     }
 
     public void alienSpawn(int limite, int comeco) {
