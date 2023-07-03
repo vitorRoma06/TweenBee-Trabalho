@@ -1,11 +1,14 @@
 package com.mygdx.game;
 
-import java.util.Random;
-
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class Alien extends Movel {
+    private int posX;
+    private int posY;
+    private int vida;
+    private boolean morto;
+    private Texture sprite;
 
     private int tipo;
     private int velX;
@@ -26,11 +29,11 @@ public class Alien extends Movel {
         if (morto == false) {
             switch (tipo) {
                 case 0:
-                    if ((posX + sprite.getWidth()) > 799 || posX < 0) {
+                    if ((posX + 50) > 799 || posX < 0) {
                         velX = velX * (-1);
                     }
                     posX = posX + velX;
-                    if ((posY + sprite.getHeight()) > 599 || posY < 400) {
+                    if ((posY + 50) > 599 || posY < 400) {
                         velY = velY * (-1);
                     }
                     posY = posY + velY;
@@ -55,7 +58,7 @@ public class Alien extends Movel {
                     }
                     posY = posY + velY;
                     break;
-                default:                          
+                default:
                     break;
             }
         }
@@ -64,8 +67,8 @@ public class Alien extends Movel {
 
     @Override
     public void posicaoIgual(int posX1, int posY1) {
-        for (int i = 0; i < sprite.getWidth() / 2; i++) {
-            for (int j = 0; j < sprite.getHeight() / 2; j++) {
+        for (int i = 0; i < 35; i++) {
+            for (int j = 0; j < 35; j++) {
                 if ((posX + j == posX1) && (posY1 == posY + i)) {
                     dano();
                 }

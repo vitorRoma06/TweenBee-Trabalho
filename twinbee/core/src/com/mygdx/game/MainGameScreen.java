@@ -56,6 +56,7 @@ public class MainGameScreen extends ApplicationAdapter implements Screen {
         bk.draw(batch);
         bk.run();
         tiro.draw(batch);
+        mortos=0;
         for (int i = 0; i < 10; i++) {
             if (aliens[i].isMorto() == true) {
                 mortos = mortos + 1;
@@ -154,6 +155,7 @@ public class MainGameScreen extends ApplicationAdapter implements Screen {
         }
         for(int i = 0; i < 10; i++){
             aliens[i].draw(batch);
+            aliens[i].posicaoIgual(tiro.getPosX(), tiro.getPosY());
         }
 
         alien.draw(batch);
