@@ -24,12 +24,14 @@ public class Boss extends Movel {
         fase = 0;
         posX = 400;
         posY = 400;
+        alt = 200;
+        larg = 200;
         ((Projeteis) tiro).setAlien();
     }
 
     @Override
     public void draw(SpriteBatch batch) {
-        batch.draw(sprite, posX, posY, 200, 200);
+        batch.draw(sprite, posX, posY,  larg, alt);
         switch (fase) {
             case 0:
                 if (posX + 200 > 799 || posX < 1) {

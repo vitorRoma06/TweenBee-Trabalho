@@ -19,6 +19,9 @@ public class Projeteis extends Movel {
         this.sprite = sprite;
         this.scale = scale;
         this.somTiro = somTiro;
+        alt = (int)(scale*20);
+        larg = (int)(scale*20);
+
     }
 
     public void setPos(int posOriX, int posOriY, int alt, int larg) {

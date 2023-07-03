@@ -26,13 +26,15 @@ public class MainGameScreen extends ApplicationAdapter implements Screen {
     private Texture tiroAlien;
 
     private Music backgroundMusic;
-    public SpriteBatch batch;
-    private Background bk;
+    
     private Sound morteNaveSound;
+    private Sound somTiro;
+    private Sound hitSound;
+
     private Movel player;
     private Projeteis tiro;
-    private Movel alien;
-    private Sound somTiro;
+    public SpriteBatch batch;
+    private Background bk;
 
     private Alien aliens[] = new Alien[10];
     private Projeteis tiros[] = new Projeteis[10];
@@ -56,6 +58,7 @@ public class MainGameScreen extends ApplicationAdapter implements Screen {
 
         morteNaveSound = Gdx.audio.newSound(Gdx.files.internal("sounds/morte-nave.mp3"));
         somTiro = Gdx.audio.newSound(Gdx.files.internal("sounds/tiro.mp3"));
+        hitSound = Gdx.audio.newSound(Gdx.files.internal("sounds/hitsound.mp3"));
         
         background = new Texture("background.png");
         nave = new Texture("nave.png");
@@ -121,8 +124,10 @@ public class MainGameScreen extends ApplicationAdapter implements Screen {
             if (TimeUtils.nanoTime() / 1000000000 > cooldown + 2) {
                 if (player.posicaoIgual(aliens[i].getPosX(), aliens[i].getPosY(), 50, 50) == true) {
                     cooldown = TimeUtils.nanoTime() / 1000000000;
+                    hitSound.play();
                 }else if (player.posicaoIgual(tiros[i].getPosX(), tiros[i].getPosY(), 35, 35) == true) {
                     cooldown = TimeUtils.nanoTime() / 1000000000;
+                    hitSound.play();
                     tiros[i].setMorto(true);
                 }
             }

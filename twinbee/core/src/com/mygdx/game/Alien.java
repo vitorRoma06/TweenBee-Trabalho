@@ -29,6 +29,8 @@ public class Alien extends Movel {
         this.sprite2 = sprite2;
         this.sprite1 = sprite1;
         this.tiro = tiro;
+        larg = 50;
+        alt = 50;
         morto = true;
         vida = 1;
         posX = 0;
@@ -61,7 +63,7 @@ public class Alien extends Movel {
                     if(tiro.posY < 0){
                         tiro.setMorto(true);
                     }
-                    batch.draw(sprite, posX, posY, 50, 50);
+                    batch.draw(sprite, posX, posY, larg, alt);
                     break;
                 case 1:
                     if ((posX + 50) > 800 || posX < 0) {
@@ -72,7 +74,7 @@ public class Alien extends Movel {
                         velY = velY * (-1);
                     }
                     posY = posY + velY;
-                    batch.draw(sprite1, posX, posY, 50, 50);
+                    batch.draw(sprite1, posX, posY,  larg, alt);
                     break;
                 case 2:
                     if ((posX + 50) > 800 || posX < 0) {
@@ -83,10 +85,10 @@ public class Alien extends Movel {
                         velY = velY * (-1);
                     }
                     posY = posY + velY;
-                    batch.draw(sprite2, posX, posY, 50, 50);
+                    batch.draw(sprite2, posX, posY,  larg, alt);
                     break;
                 default:
-                    batch.draw(sprite, posX, posY, 50, 50);
+                    batch.draw(sprite, posX, posY,  larg, alt);
                     break;
             }
         }

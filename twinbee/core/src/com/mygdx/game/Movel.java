@@ -7,27 +7,28 @@ public class Movel {
     protected int posX;
     protected int posY;
     protected int vida;
+    protected int larg;
+    protected int alt;
     public boolean morto;
     protected Texture sprite;
     TwinBeeJogo game;
 
     public boolean posicaoIgual(int posX1, int posY1, int height, int width) {
-        for (int i = 0; i < height; i++) {
-            for (int j = 0; j < width; j++) {
-                if ((posX + j == posX1) && (posY1 == posY + i)) {
-                    dano();
-                    return true;
+        for (int i = 0; i < alt; i++) {
+            for (int j = 0; j < larg; j++) {
+                for (int m = 0; m < width; m++) {
+                    for (int n = 0; n < height; n++) {
+                        if ((posX + i == posX1 + m) && (posY + j == posY1 + n)) {
+                            dano();
+                            return true;
+                        }
+                    }
+
                 }
+
             }
         }
-        for (int j = 0; j < height; j++) {
-            for (int i = 0; i < width; i++) {
-                if((posX == posX1 + j) && (posY1 == posY+i)){
-                    dano();
-                    return true;
-                }
-            }
-        }
+
         return false;
     }
 
@@ -82,7 +83,5 @@ public class Movel {
     public void setVida(int vida) {
         this.vida = vida;
     }
-
-    
 
 }

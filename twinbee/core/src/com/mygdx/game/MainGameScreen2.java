@@ -30,6 +30,7 @@ public class MainGameScreen2 extends ApplicationAdapter implements Screen  {
 
     private Sound somTiro;
     private Sound morteNaveSound;
+    private Sound hitSound;
 
     public SpriteBatch batch;
 
@@ -60,6 +61,7 @@ public class MainGameScreen2 extends ApplicationAdapter implements Screen  {
 
         somTiro = Gdx.audio.newSound(Gdx.files.internal("sounds/tiro.mp3"));
         morteNaveSound = Gdx.audio.newSound(Gdx.files.internal("sounds/morte-nave.mp3"));
+        hitSound = Gdx.audio.newSound(Gdx.files.internal("sounds/hitsound.mp3"));
 
         background = new Texture("background.png");
         nave = new Texture("nave.png");
@@ -108,6 +110,7 @@ public class MainGameScreen2 extends ApplicationAdapter implements Screen  {
         // olha posições iguais
         if (TimeUtils.nanoTime() / 1000000000 > cooldown + 2) {
             if (player.posicaoIgual(boss.getPosX(), boss.getPosY(), 100, 100) == true) {
+                hitSound.play();
                 cooldown = TimeUtils.nanoTime() / 1000000000;
             }
         }
@@ -115,6 +118,7 @@ public class MainGameScreen2 extends ApplicationAdapter implements Screen  {
         if (TimeUtils.nanoTime() / 1000000000 > bossCooldown + 0.5) {
             if (boss.posicaoIgual(tiro.getPosX(), tiro.getPosY(), 50, 50) == true) {
                 bossCooldown = TimeUtils.nanoTime() / 1000000000;
+                morteNaveSound.play();
                 tiro.setMorto(true);
             }
         }

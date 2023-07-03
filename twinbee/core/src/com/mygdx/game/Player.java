@@ -20,6 +20,8 @@ public class Player extends Movel {
         this.sprite = sprite;
         powerup = 1;
         this.tiro = tiro;
+        alt = sprite.getHeight();
+        larg = sprite.getWidth();
         
     }
 
