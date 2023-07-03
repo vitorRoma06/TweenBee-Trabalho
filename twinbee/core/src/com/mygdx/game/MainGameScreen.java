@@ -70,16 +70,21 @@ public class MainGameScreen extends ApplicationAdapter implements Screen {
         font.draw(batch, "Pontuação: "+ pont,30,550);
         font.draw(batch, "Tempo: "+ (TimeUtils.nanoTime()/1000000000 - temp),700,550);
         tiro.draw(batch);
+        alien.draw(batch);
+        player.draw(batch);
+
         mortos=0;
+        //ve se aliens estão mortos
         for (int i = 0; i < 10; i++) {
             if (aliens[i].isMorto() == true) {
                 mortos = mortos + 1;
             }
         }
+        //tempo desde que os aliens morreram
         if(mortos == 10 && tempo == 0){
             tempo = TimeUtils.nanoTime()/1000000000;
         }
-        ;
+        //spawna os aliens
         if (mortos == 10 && TimeUtils.nanoTime()/1000000000 > tempo+10) {
             alienSpawn(5,0);
             alienSpawn(10,5);
@@ -87,16 +92,22 @@ public class MainGameScreen extends ApplicationAdapter implements Screen {
             tempo = 0;
         }
 
+        //olha posições iguais
         for(int i = 0; i < 10; i++){
             aliens[i].draw(batch);
             if(aliens[i].posicaoIgual(tiro.getPosX(), tiro.getPosY()) == true) {
                 pont = pont + 100;
             };
+            if(player.posicaoIgual(aliens[i].getPosX(), aliens[i].getPosY())==true);{
+                
+            }
         }
-
-        alien.draw(batch);
-        player.draw(batch);
         alien.posicaoIgual(tiro.getPosX(), tiro.getPosY());
+
+        //ve se player morreu
+        if(player.isMorto() == true){
+            game.setScreen(new CreditosScreen(game));
+        }
         batch.end();
     }
 
