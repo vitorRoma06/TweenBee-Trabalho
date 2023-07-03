@@ -22,9 +22,9 @@ public class Projeteis extends Movel {
     @Override
     public void draw(SpriteBatch batch) {
         if (morto == false) {
-            posY = posY + 15;
-            batch.draw(sprite, posX, posY, 20 * scale, 20 * scale);
-            if (posY > 600) {
+            posY = posY + 7;
+            batch.draw(sprite, posX, posY, 20, 20);
+            if(posY > 600){
                 morto = true;
             }
         }

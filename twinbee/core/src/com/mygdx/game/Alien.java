@@ -51,16 +51,15 @@ public class Alien extends Movel {
 
     @Override
     public void posicaoIgual(int posX1, int posY1) {
-        for (int i = 0; i < sprite.getWidth(); i++) {
-            for (i = 0; i < sprite.getHeight(); i++) {
-                if ((posX == posX1) && (posY1 == posY + i)) {
+        for (int i = 0; i < sprite.getWidth()/2; i++) {
+            for (int j = 0; j < sprite.getHeight()/2; j++) {
+                if ((posX + j == posX1) && (posY1 == posY + i)) {
                     dano();
                     return; // Sai do método se o projétil atingir o alien
                 }
             }
             if ((posX == posX1 + i) && (posY1 == posY)) {
                 dano();
-                return; // Sai do método se o projétil atingir o alien
             }
         }
     }
