@@ -62,7 +62,7 @@ public class Alien extends Movel {
                     break;
             }
         }
-        batch.draw(sprite, posX, posY, 50, 50);
+        batch.draw(sprite, posX, posY);
     }
 
     @Override

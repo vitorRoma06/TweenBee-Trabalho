@@ -6,6 +6,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import java.util.Random;
 
@@ -26,6 +27,7 @@ public class MainGameScreen extends ApplicationAdapter implements Screen {
     Alien aliens[] = new Alien[10];
 
     Random rand = new Random();
+    private BitmapFont font;
 
     int larg, alt, mortos = 0;
     int posXs[] = new int[10];
@@ -47,12 +49,14 @@ public class MainGameScreen extends ApplicationAdapter implements Screen {
         for (int i = 0; i < 10; i++) {
             aliens[i] = new Alien(alien1);
         }
+        font = new BitmapFont();
     }
 
     @Override
     public void render(float delta) {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.begin();
+        font.draw(batch, "Pontuação",30,550);
         bk.draw(batch);
         bk.run();
         tiro.draw(batch);
