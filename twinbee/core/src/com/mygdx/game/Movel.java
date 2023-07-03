@@ -11,10 +11,18 @@ public class Movel {
     protected Texture sprite;
     TwinBeeJogo game;
 
-    public boolean posicaoIgual(int posX1, int posY1) {
-        for (int i = 0; i < 35; i++) {
-            for (int j = 0; j < 35; j++) {
+    public boolean posicaoIgual(int posX1, int posY1, int height, int width) {
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
                 if ((posX + j == posX1) && (posY1 == posY + i)) {
+                    dano();
+                    return true;
+                }
+            }
+        }
+        for (int j = 0; j < height; j++) {
+            for (int i = 0; i < width; i++) {
+                if((posX == posX1 + j) && (posY1 == posY+i)){
                     dano();
                     return true;
                 }

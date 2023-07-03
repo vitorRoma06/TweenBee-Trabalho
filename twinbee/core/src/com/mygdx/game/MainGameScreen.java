@@ -100,18 +100,19 @@ public class MainGameScreen extends ApplicationAdapter implements Screen {
         // olha posições iguais
         for (int i = 0; i < 10; i++) {
             aliens[i].draw(batch);
-            if (aliens[i].posicaoIgual(tiro.getPosX(), tiro.getPosY()) == true) {
+            if (aliens[i].posicaoIgual(tiro.getPosX(), tiro.getPosY(), 35, 35) == true) {
                 pont = pont + 100;
+                tiro.setMorto(true);
             }
             ;
             if (TimeUtils.nanoTime() / 1000000000 > cooldown + 2) {
-                if (player.posicaoIgual(aliens[i].getPosX(), aliens[i].getPosY()) == true) {
+                if (player.posicaoIgual(aliens[i].getPosX(), aliens[i].getPosY(), 50,50) == true){
                     cooldown = TimeUtils.nanoTime() / 1000000000;
                 }
             }
 
         }
-        alien.posicaoIgual(tiro.getPosX(), tiro.getPosY());
+        alien.posicaoIgual(tiro.getPosX(), tiro.getPosY(),tiro.sprite.getHeight(),tiro.sprite.getWidth());
 
         // ve se player morreu
         if (!isGameOver) {

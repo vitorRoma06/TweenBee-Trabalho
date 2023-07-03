@@ -70,7 +70,7 @@ public class Alien extends Movel {
     }
 
     @Override
-    public boolean posicaoIgual(int posX1, int posY1) {
+    public boolean posicaoIgual(int posX1, int posY1, int height, int width) {
         for (int i = 0; i < 35; i++) {
             for (int j = 0; j < 35; j++) {
                 if ((posX + j == posX1) && (posY1 == posY + i)) {

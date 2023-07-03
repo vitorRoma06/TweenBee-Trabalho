@@ -20,12 +20,12 @@ public class MainGameScreen2 extends ApplicationAdapter implements Screen{
     private Texture alien1;
     private Texture alien2;
     private Texture alien3;
+    private Texture boss1;
 
     public SpriteBatch batch;
     private Background bk;
     private Movel player;
     private Projeteis tiro;
-    private Movel alien;
     Alien aliens[] = new Alien[10];
     private Movel boss;
 
@@ -52,15 +52,12 @@ public class MainGameScreen2 extends ApplicationAdapter implements Screen{
         alien1 = new Texture("alien1.png");
         alien2 = new Texture("alien2.png");
         alien3 = new Texture("alien3.png");
+        boss1 = new Texture("boss.png");
         tiro = new Projeteis(tiro1, batch, scale);
         player = new Player(nave, tiro1, tiro);
-        alien = new Alien(alien1, alien2, alien3);
-        for (int i = 0; i < 10; i++) {
-            aliens[i] = new Alien(alien1, alien2, alien3);
-        }
+        boss = new Boss(game, boss1);
         font = new BitmapFont();
         temp = TimeUtils.nanoTime()/1000000000;
-        //a
     }
 
     @Override
@@ -73,19 +70,18 @@ public class MainGameScreen2 extends ApplicationAdapter implements Screen{
         font.draw(batch, "Vida: " + player.vida, 30, 520);
         font.draw(batch, "Tempo: " + (TimeUtils.nanoTime() / 1000000000 - temp), 700, 550);
         tiro.draw(batch);
-        alien.draw(batch);
+        boss.draw(batch);
         player.draw(batch);
 
         // olha posições iguais
         for (int i = 0; i < 10; i++) {
             if (TimeUtils.nanoTime() / 1000000000 > cooldown + 2) {
-                if (player.posicaoIgual(boss.getPosX(), boss.getPosY()) == true){
+                if (player.posicaoIgual(boss.getPosX(), boss.getPosY(), 180, 200) == true){
                     cooldown = TimeUtils.nanoTime() / 1000000000;
                 }
             }
 
         }
-        alien.posicaoIgual(tiro.getPosX(), tiro.getPosY());
 
         // ve se player morreu
         if (player.isMorto() == true) {
