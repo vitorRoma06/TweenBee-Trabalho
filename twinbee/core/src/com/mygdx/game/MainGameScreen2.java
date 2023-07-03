@@ -121,7 +121,7 @@ public class MainGameScreen2 extends ApplicationAdapter implements Screen  {
             }
         }
 
-        if (TimeUtils.nanoTime() / 1000000000 > bossCooldown + 0.5) {
+        if (TimeUtils.nanoTime() / 1000000000 > bossCooldown + 0.2) {
             if (boss.posicaoIgual(tiro.getPosX(), tiro.getPosY(), 120, 120) == true) {
                 bossCooldown = TimeUtils.nanoTime() / 1000000000;
                 morteNaveSound.play();
