@@ -20,7 +20,7 @@ public class Alien extends Movel {
         vida = 1;
         Random random = new Random();
         posX = random.nextInt(screenWidth - sprite.getWidth()); // Posição aleatória dentro da largura da tela
-        posY = 500; // Posicionado no topo da tela
+        posY = 300; // Posicionado no topo da tela
         morto = false;
     }
 
@@ -29,11 +29,11 @@ public class Alien extends Movel {
         if (morto == false) {
             switch (tipo) {
                 case 0:
-                    if ((posX + 50) > 799 || posX < 0) {
+                    if ((posX + sprite.getWidth()) > 799 || posX < 0) {
                         velX = velX * (-1);
                     }
                     posX = posX + velX;
-                    if ((posY + 50) > 599 || posY < 400) {
+                    if ((posY + sprite.getHeight()) > 599 || posY < 400) {
                         velY = velY * (-1);
                     }
                     posY = posY + velY;
@@ -42,7 +42,7 @@ public class Alien extends Movel {
                     break;
                 case 3:
                     break;
-                default:
+                default:                          
                     break;
             }
         }
@@ -51,14 +51,12 @@ public class Alien extends Movel {
 
     @Override
     public void posicaoIgual(int posX1, int posY1) {
-        for (int i = 0; i < sprite.getWidth()/3; i++) {
-            for (int j = 0; j < sprite.getHeight()/2; j++) {
-                if ((posX + j == posX1) && (posY1 == posY + i)) {
-                    dano();
-                    return; // Sai do método se o projétil atingir o alien
-                }
-            }
-            if ((posX == posX1 + i) && (posY1 == posY)) {
+        if (morto == false) {
+            int alienLargura = sprite.getWidth() / 5; // Largura da hitbox do alien
+            int alienAltura = sprite.getHeight() / 3; // Altura da hitbox do alien
+
+            if (posX1 >= posX && posX1 <= posX + alienLargura &&
+                    posY1 >= posY && posY1 <= posY + alienAltura) {
                 dano();
             }
         }
