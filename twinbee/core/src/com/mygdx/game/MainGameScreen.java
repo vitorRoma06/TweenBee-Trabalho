@@ -1,6 +1,7 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 
 import com.badlogic.gdx.Screen;
@@ -102,7 +103,7 @@ public class MainGameScreen extends ApplicationAdapter implements Screen {
             tempo = TimeUtils.nanoTime() / 1000000000;
         }
         // spawna os aliens
-        if (mortos == 10 && TimeUtils.nanoTime() / 1000000000 > tempo + 10) {
+        if (mortos == 10 && TimeUtils.nanoTime() / 1000000000 > tempo + 7) {
             alienSpawn(5, 0);
             alienSpawn(10, 5);
             mortos = 0;
@@ -139,13 +140,17 @@ public class MainGameScreen extends ApplicationAdapter implements Screen {
             if (player.isMorto()) {
                 backgroundMusic.stop();
                 isGameOver = true;
-                game.setScreen(new MainGameScreen2(game));
+                game.setScreen(new GameOver(game));
             }
         } else {
             if (Gdx.input.justTouched()) {
                 isGameOver = false;
                 backgroundMusic.play();
             }
+        }
+
+        if(pont >= 6000){
+            game.setScreen(new BossScreen(game));
         }
 
         batch.end();

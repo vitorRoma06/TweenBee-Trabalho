@@ -12,7 +12,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import java.util.Random;
 import com.badlogic.gdx.utils.TimeUtils;
 
-public class MainGameScreen2 extends ApplicationAdapter implements Screen  {
+public class BossScreen extends ApplicationAdapter implements Screen  {
     final TwinBeeJogo game;
 
     private Texture background;
@@ -56,7 +56,7 @@ public class MainGameScreen2 extends ApplicationAdapter implements Screen  {
     double cooldown = 0;
     double bossCooldown = 0;
 
-    public MainGameScreen2(TwinBeeJogo game) {
+    public BossScreen(TwinBeeJogo game) {
         this.game = game;
         batch = new SpriteBatch();
 
@@ -121,9 +121,9 @@ public class MainGameScreen2 extends ApplicationAdapter implements Screen  {
             }
         }
 
-        if (TimeUtils.nanoTime() / 1000000000 > bossCooldown + 0.2) {
+        if (TimeUtils.nanoTime() / 1000000 > bossCooldown + 500) {
             if (boss.posicaoIgual(tiro.getPosX(), tiro.getPosY(), 120, 120) == true) {
-                bossCooldown = TimeUtils.nanoTime() / 1000000000;
+                bossCooldown = TimeUtils.nanoTime() / 1000000;
                 morteNaveSound.play();
                 tiro.setMorto(true);
             }

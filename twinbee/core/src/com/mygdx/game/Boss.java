@@ -79,7 +79,7 @@ public class Boss extends Movel {
                 break;
             case 1:
                 velX = 7;
-                velY = -1;
+                velY = -2;
                 dano();
                 this.fase = 1;
                 break;
