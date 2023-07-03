@@ -18,17 +18,20 @@ public class Boss extends Movel{
         velX = 5;
         velY = 5;
         fase = 0;
+        posX = 400;
+        posY = 300;
     }
 
     @Override
     public void draw(SpriteBatch batch) {
+        batch.draw(sprite, posX, posY, 200, 200);
         switch (fase) {
             case 0:
-            if(posX +sprite.getWidth() > 799 || posX < 1){
+            if(posX +200 > 799 || posX < 1){
                 velX = velX*-1;
             }
             posX = posX + velX;
-            if(posY +sprite.getHeight() > 599 || posY < 300){
+            if(posY + 170 > 599 || posY < 0){
                 velY = velY*-1;
             }
             posY = posY + velY;
@@ -38,6 +41,6 @@ public class Boss extends Movel{
             case 2:
             break;
         }
-        batch.draw(sprite, posX, posY);
+        
     }
 }
