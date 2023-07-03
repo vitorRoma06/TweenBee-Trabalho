@@ -38,7 +38,6 @@ public class MainGameScreen extends ApplicationAdapter implements Screen {
     private Projeteis tiros[] = new Projeteis[10];
 
     Random rand = new Random();
-    private BitmapFont font;
     private long temp;
 
     boolean isGameOver = false;
@@ -73,7 +72,6 @@ public class MainGameScreen extends ApplicationAdapter implements Screen {
             tiros[i] = new Projeteis(tiroAlien, batch, scale, somTiro);
             aliens[i] = new Alien(alien1, alien2, alien3, morteNaveSound, tiros[i]);
         }
-        font = new BitmapFont();
         temp = TimeUtils.nanoTime() / 1000000000;
     }
 
@@ -83,9 +81,9 @@ public class MainGameScreen extends ApplicationAdapter implements Screen {
         batch.begin();
         bk.draw(batch);
         bk.run();
-        font.draw(batch, "Pontuação: " + pont, 30, 550);
-        font.draw(batch, "Vida: " + player.vida, 30, 520);
-        font.draw(batch, "Tempo: " + (TimeUtils.nanoTime() / 1000000000 - temp), 700, 550);
+        game.font.draw(batch, "Pontuação: " + pont, 30, 550);
+        game.font.draw(batch, "Vida: " + player.vida, 30, 520);
+        game.font.draw(batch, "Tempo: " + (TimeUtils.nanoTime() / 1000000000 - temp), 700, 550);
         tiro.draw(batch);
         player.draw(batch);
         mortos = 0;

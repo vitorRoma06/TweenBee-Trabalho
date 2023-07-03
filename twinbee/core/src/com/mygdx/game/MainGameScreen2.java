@@ -7,7 +7,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
+
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import java.util.Random;
 import com.badlogic.gdx.utils.TimeUtils;
@@ -43,7 +43,6 @@ public class MainGameScreen2 extends ApplicationAdapter implements Screen  {
     private Movel bossTiro;
 
     Random rand = new Random();
-    private BitmapFont font;
     private long temp;
 
     int larg, alt, mortos = 0;
@@ -79,7 +78,6 @@ public class MainGameScreen2 extends ApplicationAdapter implements Screen  {
         bossTiro = new Projeteis(tiroBoss, batch, scale*4, somTiro);
         player = new Player(nave, tiro);
         boss = new Boss(game, boss1, bossTiro);
-        font = new BitmapFont();
         for (int i = 0; i < 10; i++) {
             tiros[i] = new Projeteis(tiroAlien, batch, scale, somTiro);
             aliens[i] = new Alien(alien1, alien2, alien3, morteNaveSound, tiros[i]);
@@ -93,9 +91,9 @@ public class MainGameScreen2 extends ApplicationAdapter implements Screen  {
         batch.begin();
         bk.draw(batch);
         bk.run();
-        font.draw(batch, "Pontuação: " + pont, 30, 550);
-        font.draw(batch, "Vida: " + player.vida, 30, 520);
-        font.draw(batch, "Tempo: " + (TimeUtils.nanoTime() / 1000000000 - temp), 700, 550);
+        game.font.draw(batch, "Pontuação: " + pont, 30, 550);
+        game.font.draw(batch, "Vida: " + player.vida, 30, 520);
+        game.font.draw(batch, "Tempo: " + (TimeUtils.nanoTime() / 1000000000 - temp), 700, 550);
         for(int i = 0; i < 30; i++){
             batch.draw(green, 0+(i*5), 595,20,20);
         }
