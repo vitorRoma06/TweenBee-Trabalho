@@ -4,11 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class Alien extends Movel {
-    private int posX;
-    private int posY;
     private int vida;
-    private boolean morto;
-    private Texture sprite;
     private Texture sprite1;
     private Texture sprite2;
 
