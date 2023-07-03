@@ -14,6 +14,7 @@ public class TwinBeeJogo extends Game {
 		// A fonte usada será Comic Sans
 		font = new BitmapFont(Gdx.files.internal("assets/consolas.fnt"));
 		this.setScreen(new GameScreen(this));
+		font.setColor(1, 1, 1, 1);
 	}
 
 	public void render() {

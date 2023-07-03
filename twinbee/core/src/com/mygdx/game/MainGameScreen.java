@@ -72,7 +72,6 @@ public class MainGameScreen extends ApplicationAdapter implements Screen {
             tiros[i] = new Projeteis(tiroAlien, batch, scale, somTiro);
             aliens[i] = new Alien(alien1, alien2, alien3, morteNaveSound, tiros[i]);
         }
-        game.font = new BitmapFont();
         temp = TimeUtils.nanoTime() / 1000000000;
     }
 

@@ -23,7 +23,6 @@ public class GameScreen extends ApplicationAdapter implements Screen {
     private Background bk;
 
     // Variáveis para a tela de menu
-    private BitmapFont font;
     private String titleText = "TwinBee";
 
     // Variáveis para os botões
@@ -55,7 +54,7 @@ public class GameScreen extends ApplicationAdapter implements Screen {
         Gdx.input.setInputProcessor(stage);
 
         TextButtonStyle buttonStyle = new TextButtonStyle();
-        buttonStyle.font = font;
+        buttonStyle.font = game.font;
 
         // Carregando a imagem de fundo personalizado do botão
         Texture buttonTexture = new Texture("button.png");
@@ -93,8 +92,8 @@ public class GameScreen extends ApplicationAdapter implements Screen {
         batch.begin();
         bk.draw(batch);
         bk.run();
-        font.draw(batch, titleText, Gdx.graphics.getWidth() / 2 - font.getXHeight() * titleText.length() / 2,
-                Gdx.graphics.getHeight() / 2 + font.getXHeight());
+        game.font.draw(batch, titleText, Gdx.graphics.getWidth() / 2 - game.font.getXHeight() * titleText.length() / 2,
+                Gdx.graphics.getHeight() / 2 + game.font.getXHeight());
 
         batch.end();
 
@@ -150,7 +149,7 @@ public class GameScreen extends ApplicationAdapter implements Screen {
     public void dispose() {
         batch.dispose();
         background.dispose();
-        font.dispose();
+        game.font.dispose();
         stage.dispose();
         buttonSound.dispose();
     }

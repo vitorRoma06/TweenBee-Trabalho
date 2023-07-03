@@ -115,7 +115,6 @@ public class CreditosScreen extends ApplicationAdapter implements Screen {
     public void dispose() {
         batch.dispose();
         background.dispose();
-        game.font.dispose();
         skin.dispose();
         stage.dispose();
     }
