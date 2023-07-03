@@ -61,10 +61,10 @@ public class MainGameScreen extends ApplicationAdapter implements Screen {
         alien2 = new Texture("alien2.png");
         alien3 = new Texture("alien3.png");
         tiro = new Projeteis(tiro1, batch, scale, somTiro);
-        player = new Player(nave, tiro, morteNaveSound);
+        player = new Player(nave, tiro);
         for (int i = 0; i < 10; i++) {
-            tiros[i] = new Projeteis(tiro1, batch, scale);
-            aliens[i] = new Alien(alien1, alien2, alien3, tiros[i]);
+            tiros[i] = new Projeteis(tiro1, batch, scale, somTiro);
+            aliens[i] = new Alien(alien1, alien2, alien3, morteNaveSound, tiros[i]);
         }
         font = new BitmapFont();
         temp = TimeUtils.nanoTime() / 1000000000;
