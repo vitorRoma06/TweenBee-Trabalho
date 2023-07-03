@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-public class GameOver extends ApplicationAdapter implements Screen {
+public class GameOverScreen extends ApplicationAdapter implements Screen {
 
     final TwinBeeJogo game;
     private Texture background;
@@ -16,7 +16,7 @@ public class GameOver extends ApplicationAdapter implements Screen {
     private SpriteBatch batch;
     private Music gameOverMusic;
 
-    public GameOver(TwinBeeJogo game) {
+    public GameOverScreen(TwinBeeJogo game) {
         this.game = game;
         batch = new SpriteBatch();
         background = new Texture("background.png");
@@ -33,7 +33,7 @@ public class GameOver extends ApplicationAdapter implements Screen {
         batch.end();
         
         if (Gdx.input.justTouched()) {
-            game.setScreen(new GameScreen(game));
+            game.setScreen(new MenuScreen(game));
         }
     }
 

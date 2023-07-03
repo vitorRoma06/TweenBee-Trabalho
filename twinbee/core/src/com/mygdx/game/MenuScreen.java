@@ -14,7 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.utils.Timer;
 
-public class GameScreen extends ApplicationAdapter implements Screen {
+public class MenuScreen extends ApplicationAdapter implements Screen {
 
     final TwinBeeJogo game;
 
@@ -38,7 +38,7 @@ public class GameScreen extends ApplicationAdapter implements Screen {
     private boolean creditsButtonClicked;
     private boolean quitButtonClicked;
 
-    public GameScreen(TwinBeeJogo game) {
+    public MenuScreen(TwinBeeJogo game) {
         this.game = game;
     }
 

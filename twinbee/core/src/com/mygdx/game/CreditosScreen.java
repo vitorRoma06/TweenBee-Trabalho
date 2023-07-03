@@ -58,7 +58,7 @@ public class CreditosScreen extends ApplicationAdapter implements Screen {
         backButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                game.setScreen(new GameScreen(game));
+                game.setScreen(new MenuScreen(game));
                 dispose();
             }
         });
