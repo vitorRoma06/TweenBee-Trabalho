@@ -22,6 +22,7 @@ public class MainGameScreen2 extends ApplicationAdapter implements Screen  {
     private Texture alien2;
     private Texture alien3;
     private Texture boss1;
+    private Texture boss2;
     private Texture tiroAlien;
     private Texture tiroBoss;
 
@@ -70,6 +71,7 @@ public class MainGameScreen2 extends ApplicationAdapter implements Screen  {
         alien2 = new Texture("alien2.png");
         alien3 = new Texture("alien3.png");
         boss1 = new Texture("boss.png");
+        boss2 = new Texture("boss2.png");
         tiroAlien = new Texture("tiroAlien_1.png");
         tiroBoss = new Texture("tiroBoss.png");
         red = new Texture("red.png");
@@ -79,7 +81,7 @@ public class MainGameScreen2 extends ApplicationAdapter implements Screen  {
         tiro = new Projeteis(tiro1, batch, scale, somTiro);
         bossTiro = new Projeteis(tiroBoss, batch, scale*4, somTiro);
         player = new Player(nave, tiro);
-        boss = new Boss(game, boss1, bossTiro);
+        boss = new Boss(game, boss1, bossTiro, boss2);
         for (int i = 0; i < 10; i++) {
             tiros[i] = new Projeteis(tiroAlien, batch, scale, somTiro);
             aliens[i] = new Alien(alien1, alien2, alien3, morteNaveSound, tiros[i]);
