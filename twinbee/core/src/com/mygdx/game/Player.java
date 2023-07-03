@@ -22,6 +22,7 @@ public class Player extends Movel {
         powerup = 1;
         this.tiro1Sprite = tiro1Sprite;
         this.tiro = tiro;
+        
     }
 
     @Override

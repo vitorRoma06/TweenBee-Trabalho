@@ -1,5 +1,7 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
@@ -12,7 +14,9 @@ public class Alien extends Movel {
     private int velX;
     private int velY;
 
-    public Alien(Texture sprite, Texture sprite2, Texture sprite1) {
+    private Sound morteNaveSound;
+
+    public Alien(Texture sprite, Texture sprite2, Texture sprite1, Sound morteNaveSound) {
         this.sprite = sprite;
         this.sprite2 = sprite2;
         this.sprite1 = sprite1;
@@ -22,6 +26,8 @@ public class Alien extends Movel {
         posY = 0;
         velX = 5;
         velY = -5;
+        this.morteNaveSound = morteNaveSound;
+
     }
 
     @Override
@@ -89,6 +95,7 @@ public class Alien extends Movel {
             morto = true;
             posX = 2000;
             posY = 2000;
+            morteNaveSound.play();
         }
     }
 
