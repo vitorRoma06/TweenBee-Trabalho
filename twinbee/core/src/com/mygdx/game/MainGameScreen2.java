@@ -27,6 +27,7 @@ public class MainGameScreen2 extends ApplicationAdapter implements Screen{
     private Projeteis tiro;
     private Movel alien;
     Alien aliens[] = new Alien[10];
+    private Movel boss;
 
     Random rand = new Random();
     private BitmapFont font;
@@ -39,6 +40,7 @@ public class MainGameScreen2 extends ApplicationAdapter implements Screen{
     double tempo = 10;
     float scale = 2; 
     int pont = 0;
+    double cooldown = 0;
 
     public MainGameScreen2(TwinBeeJogo game) {
         this.game = game;
@@ -58,6 +60,7 @@ public class MainGameScreen2 extends ApplicationAdapter implements Screen{
         }
         font = new BitmapFont();
         temp = TimeUtils.nanoTime()/1000000000;
+        //a
     }
 
     @Override
@@ -66,12 +69,28 @@ public class MainGameScreen2 extends ApplicationAdapter implements Screen{
         batch.begin();
         bk.draw(batch);
         bk.run();
-        font.draw(batch, "Pontuação: "+ pont,30,550);
-        font.draw(batch, "Tempo: "+ (TimeUtils.nanoTime()/1000000000 - temp),700,550);
+        font.draw(batch, "Pontuação: " + pont, 30, 550);
+        font.draw(batch, "Vida: " + player.vida, 30, 520);
+        font.draw(batch, "Tempo: " + (TimeUtils.nanoTime() / 1000000000 - temp), 700, 550);
         tiro.draw(batch);
+        alien.draw(batch);
         player.draw(batch);
-        
+
+        // olha posições iguais
+        for (int i = 0; i < 10; i++) {
+            if (TimeUtils.nanoTime() / 1000000000 > cooldown + 2) {
+                if (player.posicaoIgual(boss.getPosX(), boss.getPosY()) == true){
+                    cooldown = TimeUtils.nanoTime() / 1000000000;
+                }
+            }
+
+        }
         alien.posicaoIgual(tiro.getPosX(), tiro.getPosY());
+
+        // ve se player morreu
+        if (player.isMorto() == true) {
+            game.setScreen(new CreditosScreen(game));
+        }
         batch.end();
     }
 
