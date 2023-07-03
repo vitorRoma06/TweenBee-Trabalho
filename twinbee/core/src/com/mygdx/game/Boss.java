@@ -2,24 +2,29 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.utils.TimeUtils;
 
-public class Boss extends Movel{
+public class Boss extends Movel {
     private TwinBeeJogo game;
+    private Movel tiro;
 
     private int velX;
     private int velY;
     private int fase;
-    
-    public Boss(TwinBeeJogo game, Texture sprite) {
+    private float cooldown;
+
+    public Boss(TwinBeeJogo game, Texture sprite, Movel tiro) {
         this.game = game;
         this.sprite = sprite;
+        this.tiro = tiro;
         this.morto = false;
         vida = 60;
         velX = 5;
         velY = 5;
         fase = 0;
         posX = 400;
-        posY = 300;
+        posY = 400;
+        ((Projeteis) tiro).setAlien();
     }
 
     @Override
@@ -27,21 +32,52 @@ public class Boss extends Movel{
         batch.draw(sprite, posX, posY, 200, 200);
         switch (fase) {
             case 0:
-            if(posX + 200 > 799 || posX < 1){
-                velX = velX*-1;
-            }
-            posX = posX + velX;
-            if(posY + 170 > 599 || posY < 0){
-                velY = velY*-1;
-            }
-            posY = posY + velY;
-            break;
+                if (posX + 200 > 799 || posX < 1) {
+                    velX = velX * -1;
+                }
+                posX = posX + velX;
+                if (posY + 170 > 599 || posY < 0) {
+                    velY = velY * -1;
+                }
+                posY = posY + velY;
+                break;
+
             case 1:
-            
-            break;
+                if (posX < 1 || posX + 200 > 799) {
+                    velX = velX * -1;
+                }
+                posX = posX + velX;
+                if (posY + 170 > 599 || posY < 350) {
+                    velY = velY * -1;
+                }
+                posY = posY + velY;
+                if (tiro.isMorto() == true && TimeUtils.nanoTime() / 1000000000> cooldown + 0.5) {
+                        tiro.setMorto(false);
+                        ((Projeteis) tiro).setPos(posX, posY, sprite.getHeight(), sprite.getWidth());
+                        cooldown = (TimeUtils.nanoTime() / 1000000000);
+                    }
+                    if(tiro.posY < 0){
+                        tiro.setMorto(true);
+                    }
+                break;
+
             case 2:
-            break;
+                break;
         }
-        
+
+    }
+
+    public void setFase(int fase) {
+        switch(fase) {
+            case 0:
+                break;
+            case 1:
+                velX = 7;
+                velY = -1;
+                break;
+            case 2:
+
+                break;
+        }
     }
 }
