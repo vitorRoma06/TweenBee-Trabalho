@@ -6,7 +6,6 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -14,7 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.utils.Timer;
 
-public class GameScreen extends ApplicationAdapter implements Screen {
+public class MenuScreen extends ApplicationAdapter implements Screen {
 
     final TwinBeeJogo game;
 
@@ -38,7 +37,7 @@ public class GameScreen extends ApplicationAdapter implements Screen {
     private boolean creditsButtonClicked;
     private boolean quitButtonClicked;
 
-    public GameScreen(TwinBeeJogo game) {
+    public MenuScreen(TwinBeeJogo game) {
         this.game = game;
     }
 
