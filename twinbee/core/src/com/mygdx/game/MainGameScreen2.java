@@ -111,14 +111,18 @@ public class MainGameScreen2 extends ApplicationAdapter implements Screen  {
 
         // olha posições iguais
         if (TimeUtils.nanoTime() / 1000000000 > cooldown + 2) {
-            if (player.posicaoIgual(boss.getPosX(), boss.getPosY(), 100, 100) == true) {
+            if (player.posicaoIgual(boss.getPosX(), boss.getPosY(), boss.larg, boss.alt) == true) {
+                hitSound.play();
+                cooldown = TimeUtils.nanoTime() / 1000000000;
+            }
+            if (player.posicaoIgual(bossTiro.getPosX(), bossTiro.getPosY(), bossTiro.larg, bossTiro.alt) == true) {
                 hitSound.play();
                 cooldown = TimeUtils.nanoTime() / 1000000000;
             }
         }
 
         if (TimeUtils.nanoTime() / 1000000000 > bossCooldown + 0.5) {
-            if (boss.posicaoIgual(tiro.getPosX(), tiro.getPosY(), 50, 50) == true) {
+            if (boss.posicaoIgual(tiro.getPosX(), tiro.getPosY(), 120, 120) == true) {
                 bossCooldown = TimeUtils.nanoTime() / 1000000000;
                 morteNaveSound.play();
                 tiro.setMorto(true);

@@ -3,11 +3,12 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.utils.TimeUtils;
 
 
 public class Player extends Movel {
 
-
+    float cooldown;
     Projeteis tiro;
 
     private int powerup;
@@ -22,6 +23,7 @@ public class Player extends Movel {
         this.tiro = tiro;
         alt = sprite.getHeight();
         larg = sprite.getWidth();
+        
         
     }
 
@@ -38,9 +40,10 @@ public class Player extends Movel {
         }
 
         if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
-            if(tiro.isMorto() == true){
+            if(tiro.isMorto() == true && TimeUtils.nanoTime()/1000000 > (cooldown) + 500){
                 tiro.setMorto(false);
-                tiro.setPos(posX, posY, sprite.getHeight(), sprite.getWidth()); 
+                tiro.setPos(posX, posY, sprite.getHeight(), sprite.getWidth());
+                cooldown = TimeUtils.nanoTime() / 1000000; 
             }
             
         }

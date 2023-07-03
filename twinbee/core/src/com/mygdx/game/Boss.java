@@ -40,7 +40,7 @@ public class Boss extends Movel {
                     velX = velX * -1;
                 }
                 posX = posX + velX;
-                if (posY + 170 > 599 || posY < 0) {
+                if (posY + 200 > 599 || posY < 0) {
                     velY = velY * -1;
                 }
                 posY = posY + velY;
@@ -51,7 +51,7 @@ public class Boss extends Movel {
                     velX = velX * -1;
                 }
                 posX = posX + velX;
-                if (posY + 170 > 599 || posY < 350) {
+                if (posY + 200 > 599 || posY < 350) {
                     velY = velY * -1;
                 }
                 posY = posY + velY;
@@ -80,10 +80,11 @@ public class Boss extends Movel {
             case 1:
                 velX = 7;
                 velY = -1;
+                dano();
                 this.fase = 1;
                 break;
             case 2:
-
+                dano();
                 break;
         }
     }
