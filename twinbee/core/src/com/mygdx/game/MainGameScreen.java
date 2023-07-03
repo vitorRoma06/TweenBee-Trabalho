@@ -23,6 +23,8 @@ public class MainGameScreen extends ApplicationAdapter implements Screen {
     private Texture alien1;
     private Texture alien2;
     private Texture alien3;
+    private Texture tiroAlien;
+
     private Music backgroundMusic;
     public SpriteBatch batch;
     private Background bk;
@@ -31,6 +33,7 @@ public class MainGameScreen extends ApplicationAdapter implements Screen {
     private Projeteis tiro;
     private Movel alien;
     private Sound somTiro;
+
     private Alien aliens[] = new Alien[10];
     private Projeteis tiros[] = new Projeteis[10];
 
@@ -60,10 +63,11 @@ public class MainGameScreen extends ApplicationAdapter implements Screen {
         alien1 = new Texture("alien1.png");
         alien2 = new Texture("alien2.png");
         alien3 = new Texture("alien3.png");
+        tiroAlien = new Texture("tiroAlien_1.png");
         tiro = new Projeteis(tiro1, batch, scale, somTiro);
         player = new Player(nave, tiro);
         for (int i = 0; i < 10; i++) {
-            tiros[i] = new Projeteis(tiro1, batch, scale, somTiro);
+            tiros[i] = new Projeteis(tiroAlien, batch, scale, somTiro);
             aliens[i] = new Alien(alien1, alien2, alien3, morteNaveSound, tiros[i]);
         }
         font = new BitmapFont();
