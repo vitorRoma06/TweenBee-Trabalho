@@ -98,6 +98,9 @@ public class Alien extends Movel {
 
     public void setTipo(int tipo) {
         this.tipo = tipo;
+        if(tipo == 1){
+            velX = velX*-1;
+        }
     }
 
     public int getPosX() {

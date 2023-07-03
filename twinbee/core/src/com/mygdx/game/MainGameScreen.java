@@ -31,13 +31,13 @@ public class MainGameScreen extends ApplicationAdapter implements Screen {
 
     Random rand = new Random();
     private BitmapFont font;
-    private long Temp;
+    private long temp;
 
 
     int larg, alt, mortos = 0;
     int posXs[] = new int[10];
     int posYs[] = new int[10];
-    float tempo = 0;
+    double tempo = 10;
     float scale = 2; 
     int pont = 0;
 
@@ -58,7 +58,7 @@ public class MainGameScreen extends ApplicationAdapter implements Screen {
             aliens[i] = new Alien(alien1, alien2, alien3);
         }
         font = new BitmapFont();
-        Temp = TimeUtils.millis();
+        temp = TimeUtils.nanoTime()/1000000000;
     }
 
     @Override
@@ -68,6 +68,7 @@ public class MainGameScreen extends ApplicationAdapter implements Screen {
         bk.draw(batch);
         bk.run();
         font.draw(batch, "Pontuação: "+ pont,30,550);
+        font.draw(batch, "Tempo: "+ (TimeUtils.nanoTime()/1000000000 - temp),700,550);
         tiro.draw(batch);
         mortos=0;
         for (int i = 0; i < 10; i++) {
@@ -75,18 +76,19 @@ public class MainGameScreen extends ApplicationAdapter implements Screen {
                 mortos = mortos + 1;
             }
         }
+        if(mortos == 10 && tempo == 0){
+            tempo = TimeUtils.nanoTime()/1000000000;
+        }
         ;
-        if (mortos == 10) {
+        if (mortos == 10 && TimeUtils.nanoTime()/1000000000 > tempo+10) {
             alienSpawn(5,0);
             alienSpawn(10,5);
             mortos = 0;
+            tempo = 0;
         }
+
         for(int i = 0; i < 10; i++){
-            if(i < 5){
-                aliens[i].draw(batch);
-            }else {
-                aliens[i].draw(batch);
-            }
+            aliens[i].draw(batch);
             if(aliens[i].posicaoIgual(tiro.getPosX(), tiro.getPosY()) == true) {
                 pont = pont + 100;
             };
