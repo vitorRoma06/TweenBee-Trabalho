@@ -140,7 +140,7 @@ public class MainGameScreen extends ApplicationAdapter implements Screen {
             if (player.isMorto()) {
                 backgroundMusic.stop();
                 isGameOver = true;
-                game.setScreen(new GameOver(game));
+                game.setScreen(new GameOverScreen(game));
             }
         } else {
             if (Gdx.input.justTouched()) {

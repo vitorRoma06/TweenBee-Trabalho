@@ -12,7 +12,7 @@ public class TwinBeeJogo extends Game {
 	public void create() {
 		batch = new SpriteBatch();
 		// A fonte usada será Comic Sans
-		font = new BitmapFont(Gdx.files.internal("assets/fonte.fnt"));
+		font = new BitmapFont(Gdx.files.internal("assets/consolas.fnt"));
 		this.setScreen(new MenuScreen(this));
 	}
 
