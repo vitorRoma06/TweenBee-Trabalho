@@ -54,16 +54,19 @@ public class MainGameScreen extends ApplicationAdapter implements Screen {
     public MainGameScreen(TwinBeeJogo game) {
         this.game = game;
         batch = new SpriteBatch();
+
         morteNaveSound = Gdx.audio.newSound(Gdx.files.internal("sounds/morte-nave.mp3"));
         somTiro = Gdx.audio.newSound(Gdx.files.internal("sounds/tiro.mp3"));
+        
         background = new Texture("background.png");
-        bk = new Background(background);
         nave = new Texture("nave.png");
         tiro1 = new Texture("tiro22.png");
         alien1 = new Texture("alien1.png");
         alien2 = new Texture("alien2.png");
         alien3 = new Texture("alien3.png");
         tiroAlien = new Texture("tiroAlien_1.png");
+
+        bk = new Background(background);
         tiro = new Projeteis(tiro1, batch, scale, somTiro);
         player = new Player(nave, tiro);
         for (int i = 0; i < 10; i++) {
