@@ -14,16 +14,14 @@ public class Alien extends Movel {
     private int velX;
     private int velY;
 
-    public Alien(Texture sprite, int tipo, int posX, int posY) {
+    public Alien(Texture sprite) {
         this.sprite = sprite;
-        if (tipo == 0) {
-            velX = 3;
-            velY = 3;
-        }
+        morto = true;
         vida = 1;
-        this.posX = posX;
-        this.posY = posY;
-        morto = false;
+        posX = 0;
+        posY = 0;
+        velX = 3;
+        velY = 3;
     }
 
     @Override
@@ -41,8 +39,24 @@ public class Alien extends Movel {
                     posY = posY + velY;
                     break;
                 case 1:
+                    if ((posX + 50) > 800 || posX < 0) {
+                        velX = velX * (-1);
+                    }
+                    posX = posX + velX;
+                    if ((posY + 50) > 599 || posY < 1) {
+                        velY = velY * (-1);
+                    }
+                    posY = posY + velY;
                     break;
-                case 3:
+                case 2:
+                    if ((posX + 50) > 800 || posX < 0) {
+                        velX = velX * (-1);
+                    }
+                    posX = posX + velX;
+                    if ((posY + 50) > 599 || posY < 1) {
+                        velY = velY * (-1);
+                    }
+                    posY = posY + velY;
                     break;
                 default:
                     break;
@@ -53,8 +67,8 @@ public class Alien extends Movel {
 
     @Override
     public void posicaoIgual(int posX1, int posY1) {
-        for (int i = 0; i < sprite.getWidth()/2; i++) {
-            for (int j = 0; j < sprite.getHeight()/2; j++) {
+        for (int i = 0; i < sprite.getWidth() / 2; i++) {
+            for (int j = 0; j < sprite.getHeight() / 2; j++) {
                 if ((posX + j == posX1) && (posY1 == posY + i)) {
                     dano();
                 }
@@ -71,5 +85,42 @@ public class Alien extends Movel {
             posY = 2000;
         }
     }
+
+    public void setTipo(int tipo) {
+        this.tipo = tipo;
+    }
+
+    public int getPosX() {
+        return posX;
+    }
+
+    public void setPosX(int posX) {
+        this.posX = posX;
+    }
+
+    public int getPosY() {
+        return posY;
+    }
+
+    public void setPosY(int posY) {
+        this.posY = posY;
+    }
+
+    public int getTipo() {
+        return tipo;
+    }
+
+    @Override
+    public boolean isMorto(){
+        return morto;
+    }
+
+    public void setMorto(boolean morto) {
+        this.morto = morto;
+    }
+
+    
+
+    
 
 }
