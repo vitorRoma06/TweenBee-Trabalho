@@ -4,6 +4,7 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -11,7 +12,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import java.util.Random;
 import com.badlogic.gdx.utils.TimeUtils;
 
-public class MainGameScreen2 extends ApplicationAdapter implements Screen {
+public class MainGameScreen2 extends ApplicationAdapter implements Screen  {
     final TwinBeeJogo game;
 
     private Texture background;
@@ -21,7 +22,7 @@ public class MainGameScreen2 extends ApplicationAdapter implements Screen {
     private Texture alien2;
     private Texture alien3;
     private Texture boss1;
-
+    private Sound somTiro;
     public SpriteBatch batch;
     private Background bk;
     private Movel player;
@@ -46,6 +47,7 @@ public class MainGameScreen2 extends ApplicationAdapter implements Screen {
     public MainGameScreen2(TwinBeeJogo game) {
         this.game = game;
         batch = new SpriteBatch();
+        somTiro = Gdx.audio.newSound(Gdx.files.internal("sounds/tiro.mp3"));
         background = new Texture("background.png");
         bk = new Background(background);
         nave = new Texture("nave.png");
@@ -54,7 +56,7 @@ public class MainGameScreen2 extends ApplicationAdapter implements Screen {
         alien2 = new Texture("alien2.png");
         alien3 = new Texture("alien3.png");
         boss1 = new Texture("boss.png");
-        tiro = new Projeteis(tiro1, batch, scale);
+        tiro = new Projeteis(tiro1, batch, scale, somTiro);
         player = new Player(nave, tiro);
         boss = new Boss(game, boss1);
         font = new BitmapFont();

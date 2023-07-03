@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -23,12 +24,13 @@ public class MainGameScreen extends ApplicationAdapter implements Screen {
     private Texture alien2;
     private Texture alien3;
     private Music backgroundMusic;
-
     public SpriteBatch batch;
     private Background bk;
+    private Sound morteNaveSound;
     private Movel player;
     private Projeteis tiro;
     private Movel alien;
+    private Sound somTiro;
     private Alien aliens[] = new Alien[10];
     private Projeteis tiros[] = new Projeteis[10];
 
@@ -49,6 +51,8 @@ public class MainGameScreen extends ApplicationAdapter implements Screen {
     public MainGameScreen(TwinBeeJogo game) {
         this.game = game;
         batch = new SpriteBatch();
+        morteNaveSound = Gdx.audio.newSound(Gdx.files.internal("sounds/morte-nave.mp3"));
+        somTiro = Gdx.audio.newSound(Gdx.files.internal("sounds/tiro.mp3"));
         background = new Texture("background.png");
         bk = new Background(background);
         nave = new Texture("nave.png");
@@ -56,8 +60,8 @@ public class MainGameScreen extends ApplicationAdapter implements Screen {
         alien1 = new Texture("alien1.png");
         alien2 = new Texture("alien2.png");
         alien3 = new Texture("alien3.png");
-        tiro = new Projeteis(tiro1, batch, scale);
-        player = new Player(nave, tiro);
+        tiro = new Projeteis(tiro1, batch, scale, somTiro);
+        player = new Player(nave, tiro, morteNaveSound);
         for (int i = 0; i < 10; i++) {
             tiros[i] = new Projeteis(tiro1, batch, scale);
             aliens[i] = new Alien(alien1, alien2, alien3, tiros[i]);
@@ -77,8 +81,8 @@ public class MainGameScreen extends ApplicationAdapter implements Screen {
         font.draw(batch, "Tempo: " + (TimeUtils.nanoTime() / 1000000000 - temp), 700, 550);
         tiro.draw(batch);
         player.draw(batch);
-
         mortos = 0;
+
         // ve se aliens estão mortos
         for (int i = 0; i < 10; i++) {
             if (aliens[i].isMorto() == true) {
@@ -110,7 +114,7 @@ public class MainGameScreen extends ApplicationAdapter implements Screen {
             }
             ;
             if (TimeUtils.nanoTime() / 1000000000 > cooldown + 2) {
-                if (player.posicaoIgual(aliens[i].getPosX(), aliens[i].getPosY(), 50,50) == true){
+                if (player.posicaoIgual(aliens[i].getPosX(), aliens[i].getPosY(), 50, 50) == true) {
                     cooldown = TimeUtils.nanoTime() / 1000000000;
                 }
             }
@@ -121,7 +125,7 @@ public class MainGameScreen extends ApplicationAdapter implements Screen {
         if (!isGameOver) {
             if (player.isMorto()) {
                 backgroundMusic.stop();
-                isGameOver = true;  
+                isGameOver = true;
                 game.setScreen(new MainGameScreen2(game));
             }
         } else {
@@ -162,7 +166,7 @@ public class MainGameScreen extends ApplicationAdapter implements Screen {
     public void show() {
         backgroundMusic = Gdx.audio.newMusic(Gdx.files.internal("sounds/music-start.mp3"));
         backgroundMusic.setLooping(true); // Define a música para repetir
-        backgroundMusic.setVolume(0.5f);
+        backgroundMusic.setVolume(0.2f);
         backgroundMusic.play(); // Inicia a reprodução da música
     }
 

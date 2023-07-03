@@ -1,5 +1,7 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import java.util.Random;
 
 import com.badlogic.gdx.graphics.Texture;
@@ -19,7 +21,10 @@ public class Alien extends Movel {
     Projeteis tiro;
     Random rand = new Random();
 
-    public Alien(Texture sprite, Texture sprite2, Texture sprite1, Projeteis tiro) {
+    private Sound morteNaveSound;
+
+    public Alien(Texture sprite, Texture sprite2, Texture sprite1, Sound morteNaveSound, Projeteis tiro) {
+
         this.sprite = sprite;
         this.sprite2 = sprite2;
         this.sprite1 = sprite1;
@@ -30,6 +35,8 @@ public class Alien extends Movel {
         posY = 0;
         velX = 5;
         velY = -5;
+        this.morteNaveSound = morteNaveSound;
+
         tiro.setAlien();
     }
 
@@ -106,6 +113,7 @@ public class Alien extends Movel {
             morto = true;
             posX = 2000;
             posY = 2000;
+            morteNaveSound.play();
         }
     }
 
