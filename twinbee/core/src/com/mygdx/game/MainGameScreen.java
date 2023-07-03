@@ -18,6 +18,8 @@ public class MainGameScreen extends ApplicationAdapter implements Screen {
     private Texture nave;
     private Texture tiro1;
     private Texture alien1;
+    private Texture alien2;
+    private Texture alien3;
 
     public SpriteBatch batch;
     private Background bk;
@@ -43,11 +45,13 @@ public class MainGameScreen extends ApplicationAdapter implements Screen {
         nave = new Texture("nave.png");
         tiro1 = new Texture("tiro22.png");
         alien1 = new Texture("alien1.png");
+        alien2 = new Texture("alien2.png");
+        alien3 = new Texture("alien3.png");
         tiro = new Projeteis(tiro1, batch, scale);
         player = new Player(nave, tiro1, tiro);
-        alien = new Alien(alien1);
+        alien = new Alien(alien1, alien2, alien3);
         for (int i = 0; i < 10; i++) {
-            aliens[i] = new Alien(alien1);
+            aliens[i] = new Alien(alien1, alien2, alien3);
         }
         font = new BitmapFont();
     }
@@ -68,97 +72,16 @@ public class MainGameScreen extends ApplicationAdapter implements Screen {
         }
         ;
         if (mortos == 10) {
-            int tipos = rand.nextInt(3);
-            int soma = 0;
-            for (int i = 0; i < 10; i++) {
-                aliens[i].setTipo(tipos);
-                int j = 0;
-                aliens[i].setMorto(false);
-                switch ((aliens[i].getTipo())) {
-                    case 0:
-                        // pegando posX
-                        do {
-                            posXs[i] = rand.nextInt(0, 750);
-                            if (posXs[i] == posXs[j]) {
-                                soma++;
-                                j++;
-                            }else{
-
-                            }
-                        } while (soma == 10);
-                        aliens[i].setPosX(posXs[i]);
-                        j = 0;
-                        soma = 0;
-                        // pegando posY
-                        do {
-                            posYs[i] = rand.nextInt(400, 550);
-                            if (posYs[i] != posYs[j]) {
-                                soma++;
-                                j++;
-                            }
-                        } while (soma == 10);
-                        aliens[i].setPosY(posYs[i]);
-                        break;
-                    case 1:
-                        // pegando posX
-                        do {
-                            posXs[i] = rand.nextInt(400, 750);
-                            if (posXs[i] == posXs[j]) {
-                                soma++;
-                                j++;
-                            }else{
-
-                            }
-                        } while (soma == 10);
-                        aliens[i].setPosX(posXs[i]);
-                        j = 0;
-                        soma = 0;
-                        // pegando posY
-                        do {
-                            posYs[i] = rand.nextInt(400, 550);
-                            if (posYs[i] != posYs[j]) {
-                                soma++;
-                                j++;
-                            }
-                        } while (soma == 10);
-                        aliens[i].setPosY(posYs[i]);
-                        break;
-                    case 2:
-                        // pegando posX
-                        do {
-                            posXs[i] = rand.nextInt(0, 400);
-                            if (posXs[i] == posXs[j]) {
-                                soma++;
-                                j++;
-                            }else{
-
-                            }
-                        } while (soma == 10);
-                        aliens[i].setPosX(posXs[i]);
-                        j = 0;
-                        soma = 0;
-                        // pegando posY
-                        do {
-                            posYs[i] = rand.nextInt(400, 550);
-                            if (posYs[i] != posYs[j]) {
-                                soma++;
-                                j++;
-                            }
-                        } while (soma == 10);
-                        aliens[i].setPosY(posYs[i]);
-                        break;
-                    default:
-                        aliens[i].setPosX(600);
-                        aliens[i].setPosY(600);
-                        
-                        break;
-
-                }
-            }
+            alienSpawn(5,0);
+            alienSpawn(10,5);
             mortos = 0;
         }
         for(int i = 0; i < 10; i++){
-            aliens[i].draw(batch);
+            if(i < 5){
+                aliens[i].draw(batch);
+            }else {
+                aliens[i].draw(batch);
+            }
             aliens[i].posicaoIgual(tiro.getPosX(), tiro.getPosY());
         }
 
@@ -194,4 +117,93 @@ public class MainGameScreen extends ApplicationAdapter implements Screen {
     public void show() {
     }
 
+    public void alienSpawn(int limite, int comeco) {
+        int tipos = rand.nextInt(3);
+            int soma = 0;
+            for (int i = comeco; i < limite; i++) {
+                aliens[i].setTipo(tipos);
+                int j = comeco;
+                aliens[i].setMorto(false);
+                switch ((aliens[i].getTipo())) {
+                    case 0:
+                        // pegando posX
+                        do {
+                            posXs[i] = rand.nextInt(0, 750);
+                            if (posXs[i] == posXs[j]) {
+                                soma++;
+                                j++;
+                            }else{
+
+                            }
+                        } while (soma == 5);
+                        aliens[i].setPosX(posXs[i]);
+                        j = 0;
+                        soma = 0;
+                        // pegando posY
+                        do {
+                            posYs[i] = rand.nextInt(450, 550);
+                            if (posYs[i] != posYs[j]) {
+                                soma++;
+                                j++;
+                            }
+                        } while (soma == 10);
+                        aliens[i].setPosY(posYs[i]);
+                        break;
+                    case 1:
+                        // pegando posX
+                        do {
+                            posXs[i] = rand.nextInt(500, 750);
+                            if (posXs[i] == posXs[j]) {
+                                soma++;
+                                j++;
+                            }else{
+
+                            }
+                        } while (soma == 10);
+                        aliens[i].setPosX(posXs[i]);
+                        j = 0;
+                        soma = 0;
+                        // pegando posY
+                        do {
+                            posYs[i] = rand.nextInt(450, 550);
+                            if (posYs[i] != posYs[j]) {
+                                soma++;
+                                j++;
+                            }
+                        } while (soma == 10);
+                        aliens[i].setPosY(posYs[i]);
+                        break;
+                    case 2:
+                        // pegando posX
+                        do {
+                            posXs[i] = rand.nextInt(0, 300);
+                            if (posXs[i] == posXs[j]) {
+                                soma++;
+                                j++;
+                            }else{
+
+                            }
+                        } while (soma == 10);
+                        aliens[i].setPosX(posXs[i]);
+                        j = 0;
+                        soma = 0;
+                        // pegando posY
+                        do {
+                            posYs[i] = rand.nextInt(450, 550);
+                            if (posYs[i] != posYs[j]) {
+                                soma++;
+                                j++;
+                            }
+                        } while (soma == 10);
+                        aliens[i].setPosY(posYs[i]);
+                        break;
+                    default:
+                        aliens[i].setPosX(600);
+                        aliens[i].setPosY(600);
+                        
+                        break;
+
+                }
+            }
+    }
 }
