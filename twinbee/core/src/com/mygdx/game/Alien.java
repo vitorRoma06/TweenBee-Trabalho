@@ -33,8 +33,8 @@ public class Alien extends Movel {
         vida = 1;
         posX = 0;
         posY = 0;
-        velX = 5;
-        velY = -5;
+        velX = 4;
+        velY = -4;
         this.morteNaveSound = morteNaveSound;
 
         tiro.setAlien();

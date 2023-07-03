@@ -116,10 +116,13 @@ public class MainGameScreen extends ApplicationAdapter implements Screen {
                 pont = pont + 100;
                 tiro.setMorto(true);
             }
-            ;
+            
             if (TimeUtils.nanoTime() / 1000000000 > cooldown + 2) {
                 if (player.posicaoIgual(aliens[i].getPosX(), aliens[i].getPosY(), 50, 50) == true) {
                     cooldown = TimeUtils.nanoTime() / 1000000000;
+                }else if (player.posicaoIgual(tiros[i].getPosX(), tiros[i].getPosY(), 35, 35) == true) {
+                    cooldown = TimeUtils.nanoTime() / 1000000000;
+                    tiros[i].setMorto(true);
                 }
             }
 
