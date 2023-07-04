@@ -146,7 +146,7 @@ public class MainGameScreen extends ApplicationAdapter implements Screen {
             }
         }
 
-        if(pont >= 6000){
+        if(pont >= 1){
             game.setScreen(new BossScreen(game));
         }
 
