@@ -39,6 +39,8 @@ public class GameWinScreen extends ApplicationAdapter implements Screen {
 
         batch.begin();
         game.font.draw(batch, "VOCE VENCEU!!!", Gdx.graphics.getWidth() / 2 - 50, Gdx.graphics.getHeight() / 2 + 50);
+        game.font.draw(batch, "VOCE VENCEU!!!", Gdx.graphics.getWidth() / 2 - 50, Gdx.graphics.getHeight() / 2 + 70);
+        game.font.draw(batch, "VOCE VENCEU!!!", Gdx.graphics.getWidth() / 2 - 50, Gdx.graphics.getHeight() / 2 + 90);
         batch.end();
 
         if (Gdx.input.justTouched()) {
