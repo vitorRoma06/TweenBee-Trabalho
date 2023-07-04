@@ -61,6 +61,11 @@ public class MainGameScreen extends ApplicationAdapter implements Screen {
         morteNaveSound = Gdx.audio.newSound(Gdx.files.internal("sounds/morte-nave.mp3"));
         somTiro = Gdx.audio.newSound(Gdx.files.internal("sounds/tiro.mp3"));
         hitSound = Gdx.audio.newSound(Gdx.files.internal("sounds/hitsound.mp3"));
+        backgroundMusic = Gdx.audio.newMusic(Gdx.files.internal("sounds/music-start.mp3"));
+
+        backgroundMusic.setLooping(true);
+        backgroundMusic.setVolume(0.2f);
+        backgroundMusic.play(); 
         
         background = new Texture("background.png");
         nave = new Texture("nave.png");
@@ -90,7 +95,7 @@ public class MainGameScreen extends ApplicationAdapter implements Screen {
         batch.begin();
         bk.draw(batch);
         bk.run();
-        game.font.draw(batch, "Pontuação: " + pont, 30, 550);
+        game.font.draw(batch, "Pontuacao: " + pont, 30, 550);
         game.font.draw(batch, "Vida: " + player.vida, 30, 520);
         game.font.draw(batch, "Tempo: " + (TimeUtils.nanoTime() / 1000000000 - temp), 700, 550);
         tiro.draw(batch);
@@ -155,6 +160,7 @@ public class MainGameScreen extends ApplicationAdapter implements Screen {
         }
 
         if(pont >= 1){
+            backgroundMusic.stop();
             game.setScreen(new BossScreen(game));
         }
 
@@ -187,10 +193,6 @@ public class MainGameScreen extends ApplicationAdapter implements Screen {
 
     @Override
     public void show() {
-        backgroundMusic = Gdx.audio.newMusic(Gdx.files.internal("sounds/music-start.mp3"));
-        backgroundMusic.setLooping(true); // Define a música para repetir
-        backgroundMusic.setVolume(0.2f);
-        backgroundMusic.play(); // Inicia a reprodução da música
     }
 
     public void alienSpawn(int limite, int comeco) {

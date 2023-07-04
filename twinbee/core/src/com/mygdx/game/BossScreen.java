@@ -4,6 +4,7 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
@@ -37,6 +38,7 @@ public class BossScreen extends ApplicationAdapter implements Screen  {
     private Texture red;
     private Texture green;
 
+    private Music bossMusic;
     private Sound somTiro;
     private Sound morteNaveSound;
     private Sound hitSound;
@@ -71,6 +73,11 @@ public class BossScreen extends ApplicationAdapter implements Screen  {
         somTiro = Gdx.audio.newSound(Gdx.files.internal("sounds/tiro.mp3"));
         morteNaveSound = Gdx.audio.newSound(Gdx.files.internal("sounds/morte-nave.mp3"));
         hitSound = Gdx.audio.newSound(Gdx.files.internal("sounds/hitsound.mp3"));
+        bossMusic = Gdx.audio.newMusic(Gdx.files.internal("sounds/music-boss.mp3"));
+
+        bossMusic.setLooping(true);
+        bossMusic.setVolume(0.4f);
+        bossMusic.play(); 
 
         background = new Texture("background.png");
 
@@ -201,9 +208,9 @@ public class BossScreen extends ApplicationAdapter implements Screen  {
 
         // ve se player morreu
         if (player.isMorto() == true) {
+            bossMusic.stop();
             game.setScreen(new GameOverScreen(game));
         }
-
 
         batch.end();
     }
