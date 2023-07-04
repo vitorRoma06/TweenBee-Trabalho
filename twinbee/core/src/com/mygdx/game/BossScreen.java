@@ -13,7 +13,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import java.util.Random;
 import com.badlogic.gdx.utils.TimeUtils;
 
-public class BossScreen extends ApplicationAdapter implements Screen  {
+public class BossScreen extends ApplicationAdapter implements Screen {
     final TwinBeeJogo game;
 
     private Texture background;
@@ -77,7 +77,7 @@ public class BossScreen extends ApplicationAdapter implements Screen  {
 
         bossMusic.setLooping(true);
         bossMusic.setVolume(0.4f);
-        bossMusic.play(); 
+        bossMusic.play();
 
         background = new Texture("background.png");
 
@@ -106,7 +106,7 @@ public class BossScreen extends ApplicationAdapter implements Screen  {
 
         bk = new Background(background);
         tiro = new Projeteis(tiro1, batch, scale, somTiro);
-        bossTiro = new Projeteis(tiroBoss, batch, scale*4, somTiro);
+        bossTiro = new Projeteis(tiroBoss, batch, scale * 4, somTiro);
         player = new Player(nave, tiro, nave1, nave2, nave3, nave4);
         boss = new Boss(game, boss1, bossTiro, boss2, boss2_1, boss2_2, boss3, boss3_1);
         for (int i = 0; i < 5; i++) {
@@ -125,12 +125,12 @@ public class BossScreen extends ApplicationAdapter implements Screen  {
         game.font.draw(batch, "Pontuação: " + pont, 30, 550);
         game.font.draw(batch, "Vida: " + player.vida, 30, 520);
         game.font.draw(batch, "Tempo: " + (TimeUtils.nanoTime() / 1000000000 - temp), 700, 550);
-        for(int i = 0; i < 30; i++){
-            batch.draw(green, 0+(i*5), 595,20,20);
+        for (int i = 0; i < 30; i++) {
+            batch.draw(green, 0 + (i * 5), 595, 20, 20);
         }
-        for(int i = 0; i < boss.vida; i++){
-            batch.draw(red, 0+(i*5), 595,20,20);
-         }
+        for (int i = 0; i < boss.vida; i++) {
+            batch.draw(red, 0 + (i * 5), 595, 20, 20);
+        }
         tiro.draw(batch);
         bossTiro.draw(batch);
         boss.draw(batch);
@@ -138,11 +138,12 @@ public class BossScreen extends ApplicationAdapter implements Screen  {
 
         // olha posições iguais
         if (TimeUtils.nanoTime() / 1000000000 > cooldown + 2) {
-            if (player.posicaoIgual(boss.getPosX(), boss.getPosY()+50, boss.larg/3, boss.alt) == true) {
+            if (player.posicaoIgual(boss.getPosX(), boss.getPosY() + 50, boss.larg / 3, boss.alt) == true) {
                 hitSound.play();
                 cooldown = TimeUtils.nanoTime() / 1000000000;
             }
-            if (player.posicaoIgual(bossTiro.getPosX()+20, bossTiro.getPosY()+20, bossTiro.larg/3, bossTiro.alt) == true) {
+            if (player.posicaoIgual(bossTiro.getPosX() + 20, bossTiro.getPosY() + 20, bossTiro.larg / 3,
+                    bossTiro.alt) == true) {
                 hitSound.play();
                 cooldown = TimeUtils.nanoTime() / 1000000000;
             }
@@ -156,27 +157,36 @@ public class BossScreen extends ApplicationAdapter implements Screen  {
             }
         }
 
-        //ve se alien morto
+        // boss
+        if (boss.vida == 20) {
+            ((Boss) boss).setFase(1);
+        }
+        if (boss.vida == 10) {
+            ((Boss) boss).setFase(2);
+        }
+
+        // ve se alien morto
         for (int i = 0; i < 5; i++) {
             if (aliens[i].isMorto() == true) {
                 mortos = mortos + 1;
             }
         }
 
-         // tempo desde que os aliens morreram
+        // tempo desde que os aliens morreram
         if (mortos == 5 && tempo == 0) {
             tempo = TimeUtils.nanoTime() / 1000000000;
         }
 
         // spawna os aliens
-        if (mortos == 5 && TimeUtils.nanoTime() / 1000000000 > tempo + 5 && ((Boss) boss).getFase() == 2) {
-            alienSpawn(5, 0);
+        if (mortos == 5 && ((Boss) boss).getFase() == 2) {
             mortos = 0;
+            alienSpawn(5, 0);
             tempo = 0;
         }
-        for(int i = 0; i < 5; i++){
+        for (int i = 0; i < 5; i++) {
+            aliens[i].setTipo(0);
             aliens[i].draw(batch);
-            if(aliens[i].getTipo() == 0) {
+            if (aliens[i].getTipo() == 0) {
                 tiros[i].draw(batch);
             }
 
@@ -184,27 +194,18 @@ public class BossScreen extends ApplicationAdapter implements Screen  {
                 pont = pont + 100;
                 tiro.setMorto(true);
             }
-        
+
             if (TimeUtils.nanoTime() / 1000000000 > cooldown + 2) {
                 if (player.posicaoIgual(aliens[i].getPosX(), aliens[i].getPosY(), 40, 35) == true) {
                     cooldown = TimeUtils.nanoTime() / 1000000000;
                     hitSound.play();
-                }else if (player.posicaoIgual(tiros[i].getPosX(), tiros[i].getPosY(), 35, 35) == true) {
+                } else if (player.posicaoIgual(tiros[i].getPosX(), tiros[i].getPosY(), 35, 35) == true) {
                     cooldown = TimeUtils.nanoTime() / 1000000000;
                     hitSound.play();
                     tiros[i].setMorto(true);
                 }
             }
         }
-
-        //boss
-        if(boss.vida == 20){
-            ((Boss) boss).setFase(1);
-        }
-        if(boss.vida == 10){
-            ((Boss) boss).setFase(2);
-        }
-
 
         // ve se player morreu
         if (player.isMorto() == true) {

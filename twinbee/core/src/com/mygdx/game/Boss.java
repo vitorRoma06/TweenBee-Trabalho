@@ -34,7 +34,7 @@ public class Boss extends Movel {
         vida = 30;
         velX = 5;
         velY = 5;
-        fase = 0;
+        fase = 2;
         posX = 400;
         posY = 400;
         alt = 200;
