@@ -3,9 +3,12 @@ package com.mygdx.game;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -18,11 +21,8 @@ public class MenuScreen extends ApplicationAdapter implements Screen {
     final TwinBeeJogo game;
 
     private SpriteBatch batch;
-    private Texture background;
-    private Background bk;
-
-    // Variáveis para a tela de menu
-    private String titleText = "TwinBee";
+    private Sprite twinBeeImage;
+    private float twinBeeY;
 
     // Variáveis para os botões
     private Stage stage;
@@ -32,6 +32,7 @@ public class MenuScreen extends ApplicationAdapter implements Screen {
 
     // Variável para o som do botão
     private Sound buttonSound;
+    private Music starMusic;
 
     private boolean playButtonClicked;
     private boolean creditsButtonClicked;
@@ -40,14 +41,20 @@ public class MenuScreen extends ApplicationAdapter implements Screen {
     public MenuScreen(TwinBeeJogo game) {
         this.game = game;
         batch = new SpriteBatch();
+
+        starMusic = Gdx.audio.newMusic(Gdx.files.internal("sounds/music-start.mp3"));
+        starMusic.setLooping(true);
+        starMusic.setVolume(0.2f);
+        starMusic.play();
     }
 
     @Override
     public void show() {
-        
-        background = new Texture("background.png");
-        // Inicializando a fonte para a tela de menu
-        bk = new Background(background);
+
+        Texture twinBeeTexture = new Texture("twinbee.png");
+        twinBeeImage = new Sprite(twinBeeTexture);
+        twinBeeImage.setSize(twinBeeImage.getWidth() * 0.3f, twinBeeImage.getHeight() * 0.3f);
+        twinBeeY = -twinBeeImage.getHeight();
 
         // Inicializando os botões
         stage = new Stage();
@@ -86,17 +93,24 @@ public class MenuScreen extends ApplicationAdapter implements Screen {
 
     @Override
     public void render(float delta) {
+        Color backgroundColor = Color.valueOf("#0009AC");
+        Gdx.gl.glClearColor(backgroundColor.r, backgroundColor.g, backgroundColor.b, backgroundColor.a);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        // Renderizando a tela de menu
-        batch.begin();
-        game.font.getData().setScale(1f);
-        bk.draw(batch);
-        bk.run();
-        game.font.draw(batch, titleText, Gdx.graphics.getWidth() / 2 - game.font.getXHeight() * titleText.length() / 2,
-                Gdx.graphics.getHeight() / 2 + game.font.getXHeight());
+        if (twinBeeY < Gdx.graphics.getHeight() / 2 - twinBeeImage.getHeight() / 2) {
+            twinBeeY += 1f; // Ajuste a velocidade de movimento aqui (1f = 1 pixel por frame)
+            twinBeeImage.setY(twinBeeY);
 
-        batch.end();
+            // Atualize as posições dos botões junto com o deslocamento do TwinBee
+            playButton.setPosition(Gdx.graphics.getWidth() / 2 - playButton.getWidth() / 2,
+                    twinBeeY + Gdx.graphics.getHeight() / 2 - playButton.getHeight() / 2 - 350);
+
+            creditsButton.setPosition(Gdx.graphics.getWidth() / 2 - creditsButton.getWidth() / 2,
+                    twinBeeY + Gdx.graphics.getHeight() / 2 - creditsButton.getHeight() / 2 - 400);
+
+            quitButton.setPosition(Gdx.graphics.getWidth() / 2 - quitButton.getWidth() / 2,
+                    twinBeeY + Gdx.graphics.getHeight() / 2 - quitButton.getHeight() / 2 - 450);
+        }
 
         // Verificando se os botões foram pressionados
         stage.act(delta);
@@ -144,14 +158,18 @@ public class MenuScreen extends ApplicationAdapter implements Screen {
         }
 
         stage.draw();
+        batch.begin();
+        batch.draw(twinBeeImage, Gdx.graphics.getWidth() / 2 - twinBeeImage.getWidth() / 2 - 140, twinBeeY);
+        batch.end();
     }
 
     @Override
     public void dispose() {
         batch.dispose();
-        background.dispose();
+        twinBeeImage.getTexture().dispose();
         stage.dispose();
         buttonSound.dispose();
+        starMusic.dispose();
     }
 
     @Override
