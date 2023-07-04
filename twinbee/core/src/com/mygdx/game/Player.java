@@ -20,7 +20,7 @@ public class Player extends Movel {
     private int spriteNum2;
 
     public Player(Texture sprite,  Projeteis tiro, Texture nave1, Texture nave2, Texture nave3, Texture nave4) {
-        vida = 5;
+        vida = 1;
         posX = 400;
         posY = 100;
         morto = false;
