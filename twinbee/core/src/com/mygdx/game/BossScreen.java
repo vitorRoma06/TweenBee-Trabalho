@@ -39,8 +39,8 @@ public class BossScreen extends ApplicationAdapter implements Screen  {
 
     private Movel player;
     private Projeteis tiro;
-    private Alien aliens[] = new Alien[10];
-    private Projeteis tiros[] = new Projeteis[10];
+    private Alien aliens[] = new Alien[5];
+    private Projeteis tiros[] = new Projeteis[5];
     private Movel boss;
     private Movel bossTiro;
 
@@ -129,6 +129,47 @@ public class BossScreen extends ApplicationAdapter implements Screen  {
             }
         }
 
+        //ve se alien morto
+        for (int i = 0; i < 5; i++) {
+            if (aliens[i].isMorto() == true) {
+                mortos = mortos + 1;
+            }
+        }
+
+         // tempo desde que os aliens morreram
+        if (mortos == 5 && tempo == 0) {
+            tempo = TimeUtils.nanoTime() / 1000000000;
+        }
+
+        // spawna os aliens
+        if (mortos == 5 && TimeUtils.nanoTime() / 1000000000 > tempo + 5 && ((Boss) boss).getFase() == 2) {
+            alienSpawn(5, 0);
+            mortos = 0;
+            tempo = 0;
+        }
+        for(int i = 0; i < 5; i++){
+            aliens[i].draw(batch);
+            if(aliens[i].getTipo() == 0) {
+                tiros[i].draw(batch);
+            }
+
+            if (aliens[i].posicaoIgual(tiro.getPosX(), tiro.getPosY(), 35, 35) == true) {
+                pont = pont + 100;
+                tiro.setMorto(true);
+            }
+        
+            if (TimeUtils.nanoTime() / 1000000000 > cooldown + 2) {
+                if (player.posicaoIgual(aliens[i].getPosX(), aliens[i].getPosY(), 40, 35) == true) {
+                    cooldown = TimeUtils.nanoTime() / 1000000000;
+                    hitSound.play();
+                }else if (player.posicaoIgual(tiros[i].getPosX(), tiros[i].getPosY(), 35, 35) == true) {
+                    cooldown = TimeUtils.nanoTime() / 1000000000;
+                    hitSound.play();
+                    tiros[i].setMorto(true);
+                }
+            }
+        }
+
         //boss
         if(boss.vida == 20){
             ((Boss) boss).setFase(1);
@@ -140,8 +181,10 @@ public class BossScreen extends ApplicationAdapter implements Screen  {
 
         // ve se player morreu
         if (player.isMorto() == true) {
-            game.setScreen(new CreditosScreen(game));
+            game.setScreen(new GameOverScreen(game));
         }
+
+
         batch.end();
     }
 
@@ -169,5 +212,95 @@ public class BossScreen extends ApplicationAdapter implements Screen  {
 
     @Override
     public void show() {
+    }
+
+    public void alienSpawn(int limite, int comeco) {
+        int tipos = 0;
+        int soma = 0;
+        for (int i = comeco; i < limite; i++) {
+            aliens[i].setTipo(tipos);
+            int j = comeco;
+            aliens[i].setMorto(false);
+            switch ((aliens[i].getTipo())) {
+                case 0:
+                    // pegando posX
+                    do {
+                        posXs[i] = rand.nextInt(0, 750);
+                        if (posXs[i] == posXs[j]) {
+                            soma++;
+                            j++;
+                        } else {
+
+                        }
+                    } while (soma == 5);
+                    aliens[i].setPosX(posXs[i]);
+                    j = 0;
+                    soma = 0;
+                    // pegando posY
+                    do {
+                        posYs[i] = rand.nextInt(450, 550);
+                        if (posYs[i] != posYs[j]) {
+                            soma++;
+                            j++;
+                        }
+                    } while (soma == 10);
+                    aliens[i].setPosY(posYs[i]);
+                    break;
+                case 1:
+                    // pegando posX
+                    do {
+                        posXs[i] = rand.nextInt(500, 750);
+                        if (posXs[i] == posXs[j]) {
+                            soma++;
+                            j++;
+                        } else {
+
+                        }
+                    } while (soma == 10);
+                    aliens[i].setPosX(posXs[i]);
+                    j = 0;
+                    soma = 0;
+                    // pegando posY
+                    do {
+                        posYs[i] = rand.nextInt(450, 550);
+                        if (posYs[i] != posYs[j]) {
+                            soma++;
+                            j++;
+                        }
+                    } while (soma == 10);
+                    aliens[i].setPosY(posYs[i]);
+                    break;
+                case 2:
+                    // pegando posX
+                    do {
+                        posXs[i] = rand.nextInt(0, 300);
+                        if (posXs[i] == posXs[j]) {
+                            soma++;
+                            j++;
+                        } else {
+
+                        }
+                    } while (soma == 10);
+                    aliens[i].setPosX(posXs[i]);
+                    j = 0;
+                    soma = 0;
+                    // pegando posY
+                    do {
+                        posYs[i] = rand.nextInt(450, 550);
+                        if (posYs[i] != posYs[j]) {
+                            soma++;
+                            j++;
+                        }
+                    } while (soma == 10);
+                    aliens[i].setPosY(posYs[i]);
+                    break;
+                default:
+                    aliens[i].setPosX(600);
+                    aliens[i].setPosY(600);
+
+                    break;
+
+            }
+        }
     }
 }

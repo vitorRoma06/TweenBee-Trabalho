@@ -67,6 +67,23 @@ public class Boss extends Movel {
                 break;
 
             case 2:
+            if (posX < 1 || posX + 200 > 799) {
+                    velX = velX * -1;
+                }
+                posX = posX + velX;
+                if (posY + 200 > 599 || posY < 350) {
+                    velY = velY * -1;
+                }
+                posY = posY + velY;
+                if (tiro.isMorto() == true && TimeUtils.nanoTime() / 1000000000 > cooldown + 0.5) {
+                        tiro.setMorto(false);
+                        ((Projeteis) tiro).setPos(posX, posY, sprite.getHeight(), sprite.getWidth());
+                        cooldown = (TimeUtils.nanoTime() / 1000000000);
+                    }
+                    if(tiro.posY < 0){
+                        tiro.setMorto(true);
+                    }
+                batch.draw(sprite2, posX, posY,  larg, alt);
                 break;
         }
 
@@ -84,9 +101,16 @@ public class Boss extends Movel {
                 this.fase = 1;
                 break;
             case 2:
+                velX = 8;
+                velY = -3;
+                this.fase = 2;
                 dano();
                 break;
         }
+    }
+
+    public int getFase() {
+        return fase;
     }
 
 
