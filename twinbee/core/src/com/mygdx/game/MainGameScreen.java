@@ -159,7 +159,7 @@ public class MainGameScreen extends ApplicationAdapter implements Screen {
             }
         }
 
-        if(pont >= 1){
+        if(pont >= 6000){
             backgroundMusic.stop();
             game.setScreen(new BossScreen(game));
         }
