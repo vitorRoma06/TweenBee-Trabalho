@@ -34,7 +34,7 @@ public class Boss extends Movel {
         vida = 30;
         velX = 5;
         velY = 5;
-        fase = 2;
+        fase = 1;
         posX = 400;
         posY = 400;
         alt = 200;
@@ -74,12 +74,12 @@ public class Boss extends Movel {
                     if(tiro.posY < 0){
                         tiro.setMorto(true);
                     }
-                if(((int)(TimeUtils.nanoTime()/100000000))%30 == 0){
-                    spriteNum++;
+                if(spriteNum % 60 == 0){
+                    spriteNum2++;
                 }
-                if(spriteNum%3 == 0){
+                if(spriteNum2 % 3 == 0){
                     batch.draw(sprite2, posX, posY,  larg, alt);
-                }else if(spriteNum%2 == 0){
+                }else if(spriteNum2 % 3 == 1){
                     batch.draw(sprite2_1, posX, posY,  larg, alt);
                 } else{
                     batch.draw(sprite2_2, posX, posY,  larg, alt);
@@ -104,10 +104,10 @@ public class Boss extends Movel {
                         tiro.setMorto(true);
                     }
                 
-                if(spriteNum % 100 == 0){
+                if(spriteNum % 60 == 0){
                     spriteNum2++;
                 }
-                if(spriteNum % 2 == 0){
+                if(spriteNum2 % 2 == 0){
                     batch.draw(sprite3, posX, posY,  larg, alt);
                 }else{
                     batch.draw(sprite3_1, posX, posY,  larg, alt);
