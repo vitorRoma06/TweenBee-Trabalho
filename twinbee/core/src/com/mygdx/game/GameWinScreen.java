@@ -10,9 +10,9 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-public class GameWinScreen extends ApplicationAdapter implements Screen{
+public class GameWinScreen extends ApplicationAdapter implements Screen {
 
-        final TwinBeeJogo game;
+    final TwinBeeJogo game;
     private Texture background;
     private Background bk;
     private SpriteBatch batch;
@@ -24,7 +24,9 @@ public class GameWinScreen extends ApplicationAdapter implements Screen{
         batch = new SpriteBatch();
         background = new Texture("background.png");
         bk = new Background(background);
-        gameOverMusic = Gdx.audio.newMusic(Gdx.files.internal("sounds/victory.mp3"));
+        gameOverMusic = Gdx.audio.newMusic(Gdx.files.internal("sounds/vitoria.mp3"));
+        gameOverMusic.setVolume(0.2f);
+        gameOverMusic.play();
 
         font = new BitmapFont();
         font.setColor(Color.PINK);
@@ -32,13 +34,13 @@ public class GameWinScreen extends ApplicationAdapter implements Screen{
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(0, 0, 255,0); 
+        Gdx.gl.glClearColor(0, 0, 255, 0);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         batch.begin();
         font.draw(batch, "Você venceu!!!", Gdx.graphics.getWidth() / 2 - 50, Gdx.graphics.getHeight() - 50);
         batch.end();
-        
+
         if (Gdx.input.justTouched()) {
             game.setScreen(new MenuScreen(game));
         }

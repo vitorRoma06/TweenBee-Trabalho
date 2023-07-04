@@ -66,6 +66,8 @@ public class MenuScreen extends ApplicationAdapter implements Screen {
         // Carregando a imagem de fundo personalizado do botão
         Texture buttonTexture = new Texture("button.png");
         buttonStyle.up = new Image(buttonTexture).getDrawable();
+        buttonStyle.up.setMinWidth(buttonStyle.up.getMinWidth() * 1.5f);
+        buttonStyle.up.setMinHeight(buttonStyle.up.getMinHeight() * 1.5f);
 
         playButton = new TextButton("Jogar", buttonStyle);
         playButton.setPosition(Gdx.graphics.getWidth() / 2 - playButton.getWidth() / 2,
