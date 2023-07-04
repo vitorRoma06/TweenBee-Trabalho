@@ -61,7 +61,7 @@ public class MainGameScreen extends ApplicationAdapter implements Screen {
         morteNaveSound = Gdx.audio.newSound(Gdx.files.internal("sounds/morte-nave.mp3"));
         somTiro = Gdx.audio.newSound(Gdx.files.internal("sounds/tiro.mp3"));
         hitSound = Gdx.audio.newSound(Gdx.files.internal("sounds/hitsound.mp3"));
-        backgroundMusic = Gdx.audio.newMusic(Gdx.files.internal("sounds/music-start.mp3"));
+        backgroundMusic = Gdx.audio.newMusic(Gdx.files.internal("sounds/music-main.mp3"));
 
         backgroundMusic.setLooping(true);
         backgroundMusic.setVolume(0.2f);
