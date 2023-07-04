@@ -163,26 +163,9 @@ public class BossScreen extends ApplicationAdapter implements Screen {
         }
         if (boss.vida == 10) {
             ((Boss) boss).setFase(2);
-        }
-
-        // ve se alien morto
-        for (int i = 0; i < 5; i++) {
-            if (aliens[i].isMorto() == true) {
-                mortos = mortos + 1;
-            }
-        }
-
-        // tempo desde que os aliens morreram
-        if (mortos == 5 && tempo == 0) {
-            tempo = TimeUtils.nanoTime() / 1000000000;
-        }
-
-        // spawna os aliens
-        if (mortos == 5 && ((Boss) boss).getFase() == 2) {
-            mortos = 0;
             alienSpawn(5, 0);
-            tempo = 0;
         }
+
         for (int i = 0; i < 5; i++) {
             aliens[i].setTipo(0);
             aliens[i].draw(batch);
