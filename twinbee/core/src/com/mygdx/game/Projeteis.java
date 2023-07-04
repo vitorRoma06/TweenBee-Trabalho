@@ -49,6 +49,7 @@ public class Projeteis extends Movel {
 
     public void setMorto(boolean morto) {
         this.morto = morto;
+        posX = 3000;
     }
 
     public int getPosX() {

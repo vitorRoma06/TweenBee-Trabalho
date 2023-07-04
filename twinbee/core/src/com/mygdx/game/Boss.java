@@ -8,22 +8,33 @@ public class Boss extends Movel {
     private TwinBeeJogo game;
     private Movel tiro;
     private Texture sprite2;
+    private Texture sprite3;
+    private Texture sprite2_1;
+    private Texture sprite2_2;
+    private Texture sprite3_1;
 
     private int velX;
     private int velY;
     private int fase;
     private float cooldown;
+    int spriteNum = 0;
+    int spriteNum2 = 0;
 
-    public Boss(TwinBeeJogo game, Texture sprite, Movel tiro, Texture sprite2) {
+    public Boss(TwinBeeJogo game, Texture sprite, Movel tiro, Texture sprite2, Texture sprite2_1, Texture sprite2_2, Texture sprite3, Texture sprite3_1) {
         this.game = game;
         this.sprite = sprite;
         this.sprite2 = sprite2;
+        this.sprite3 = sprite3;
+        this.sprite2_1 = sprite2_1;
+        this.sprite2_2 = sprite2_2;
+        this.sprite3_1 = sprite3_1;
         this.tiro = tiro;
         this.morto = false;
+        
         vida = 30;
         velX = 5;
         velY = 5;
-        fase = 0;
+        fase = 2;
         posX = 400;
         posY = 400;
         alt = 200;
@@ -33,7 +44,7 @@ public class Boss extends Movel {
 
     @Override
     public void draw(SpriteBatch batch) {
-        
+        spriteNum++;
         switch (fase) {
             case 0:
                 if (posX + 200 > 799 || posX < 1) {
@@ -63,15 +74,24 @@ public class Boss extends Movel {
                     if(tiro.posY < 0){
                         tiro.setMorto(true);
                     }
-                batch.draw(sprite2, posX, posY,  larg, alt);
+                if(((int)(TimeUtils.nanoTime()/100000000))%30 == 0){
+                    spriteNum++;
+                }
+                if(spriteNum%3 == 0){
+                    batch.draw(sprite2, posX, posY,  larg, alt);
+                }else if(spriteNum%2 == 0){
+                    batch.draw(sprite2_1, posX, posY,  larg, alt);
+                } else{
+                    batch.draw(sprite2_2, posX, posY,  larg, alt);
+                }
                 break;
 
             case 2:
-            if (posX < 1 || posX + 200 > 799) {
+            if (posX < 1 || posX + 200 > 799) { 
                     velX = velX * -1;
                 }
                 posX = posX + velX;
-                if (posY + 200 > 599 || posY < 350) {
+                if (posY + 200 > 599 || posY < 0) {
                     velY = velY * -1;
                 }
                 posY = posY + velY;
@@ -83,7 +103,16 @@ public class Boss extends Movel {
                     if(tiro.posY < 0){
                         tiro.setMorto(true);
                     }
-                batch.draw(sprite2, posX, posY,  larg, alt);
+                
+                if(spriteNum % 100 == 0){
+                    spriteNum2++;
+                }
+                if(spriteNum % 2 == 0){
+                    batch.draw(sprite3, posX, posY,  larg, alt);
+                }else{
+                    batch.draw(sprite3_1, posX, posY,  larg, alt);
+                }
+                
                 break;
         }
 
@@ -96,13 +125,14 @@ public class Boss extends Movel {
                 break;
             case 1:
                 velX = 7;
-                velY = -2;
+                velY = -3;
+                posY = 351;
                 dano();
                 this.fase = 1;
                 break;
             case 2:
                 velX = 8;
-                velY = -3;
+                velY = -4;
                 this.fase = 2;
                 dano();
                 break;
