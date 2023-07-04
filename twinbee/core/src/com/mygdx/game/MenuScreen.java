@@ -39,11 +39,12 @@ public class MenuScreen extends ApplicationAdapter implements Screen {
 
     public MenuScreen(TwinBeeJogo game) {
         this.game = game;
+        batch = new SpriteBatch();
     }
 
     @Override
     public void show() {
-        batch = new SpriteBatch();
+        
         background = new Texture("background.png");
         // Inicializando a fonte para a tela de menu
         bk = new Background(background);
@@ -63,7 +64,7 @@ public class MenuScreen extends ApplicationAdapter implements Screen {
         playButton.setPosition(Gdx.graphics.getWidth() / 2 - playButton.getWidth() / 2,
                 Gdx.graphics.getHeight() / 2 - playButton.getHeight() / 2 - 50);
 
-        creditsButton = new TextButton("Créditos", buttonStyle);
+        creditsButton = new TextButton("Creditos", buttonStyle);
         creditsButton.setPosition(Gdx.graphics.getWidth() / 2 - creditsButton.getWidth() / 2,
                 Gdx.graphics.getHeight() / 2 - creditsButton.getHeight() / 2 - 100);
 
@@ -89,6 +90,7 @@ public class MenuScreen extends ApplicationAdapter implements Screen {
 
         // Renderizando a tela de menu
         batch.begin();
+        game.font.getData().setScale(1f);
         bk.draw(batch);
         bk.run();
         game.font.draw(batch, titleText, Gdx.graphics.getWidth() / 2 - game.font.getXHeight() * titleText.length() / 2,
@@ -148,7 +150,6 @@ public class MenuScreen extends ApplicationAdapter implements Screen {
     public void dispose() {
         batch.dispose();
         background.dispose();
-        game.font.dispose();
         stage.dispose();
         buttonSound.dispose();
     }

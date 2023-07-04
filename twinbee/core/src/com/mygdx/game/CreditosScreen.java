@@ -98,6 +98,7 @@ public class CreditosScreen extends ApplicationAdapter implements Screen {
         game.font.setColor(1, 1, 1, 1);
         game.font.draw(batch, referencesText, 50, Gdx.graphics.getHeight() - 450, Gdx.graphics.getWidth() - 100,
                 Align.left, true);
+        game.font.getData().setScale(1f);
 
         batch.end();
 
