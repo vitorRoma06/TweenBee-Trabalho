@@ -36,10 +36,12 @@ public class GameOverScreen extends ApplicationAdapter implements Screen {
         batch.end();
 
         if (Gdx.input.isKeyJustPressed(Keys.ESCAPE)) {
+            gameOverMusic.stop();
             game.setScreen(new MenuScreen(game));
         }
 
         if (Gdx.input.isKeyJustPressed(Keys.SPACE)) {
+            gameOverMusic.stop();
             game.setScreen(new MainGameScreen(game));
         }
     }

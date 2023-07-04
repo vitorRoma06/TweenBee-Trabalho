@@ -16,7 +16,7 @@ public class GameWinScreen extends ApplicationAdapter implements Screen {
     private Texture background;
     private Background bk;
     private SpriteBatch batch;
-    private Music gameOverMusic;
+    private Music gameWinMusic;
     private BitmapFont font;
 
     public GameWinScreen(TwinBeeJogo game) {
@@ -24,9 +24,9 @@ public class GameWinScreen extends ApplicationAdapter implements Screen {
         batch = new SpriteBatch();
         background = new Texture("background.png");
         bk = new Background(background);
-        gameOverMusic = Gdx.audio.newMusic(Gdx.files.internal("sounds/vitoria.mp3"));
-        gameOverMusic.setVolume(0.2f);
-        gameOverMusic.play();
+        gameWinMusic = Gdx.audio.newMusic(Gdx.files.internal("sounds/vitoria.mp3"));
+        gameWinMusic.setVolume(0.2f);
+        gameWinMusic.play();
 
         font = new BitmapFont();
         font.setColor(Color.PINK);
@@ -38,10 +38,11 @@ public class GameWinScreen extends ApplicationAdapter implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         batch.begin();
-        font.draw(batch, "Você venceu!!!", Gdx.graphics.getWidth() / 2 - 50, Gdx.graphics.getHeight() - 50);
+        game.font.draw(batch, "VOCE VENCEU!!!", Gdx.graphics.getWidth() / 2 - 50, Gdx.graphics.getHeight() / 2 + 50);
         batch.end();
 
         if (Gdx.input.justTouched()) {
+            gameWinMusic.stop();
             game.setScreen(new MenuScreen(game));
         }
     }
@@ -66,13 +67,13 @@ public class GameWinScreen extends ApplicationAdapter implements Screen {
     public void dispose() {
         batch.dispose();
         background.dispose();
-        gameOverMusic.dispose();
+        gameWinMusic.dispose();
         font.dispose();
     }
 
     @Override
     public void show() {
-        gameOverMusic.setVolume(0.2f);
-        gameOverMusic.play(); // Inicia a reprodução da música
+        gameWinMusic.setVolume(0.2f);
+        gameWinMusic.play(); // Inicia a reprodução da música
     }
 }
