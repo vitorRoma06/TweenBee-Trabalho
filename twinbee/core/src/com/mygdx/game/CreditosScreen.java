@@ -3,6 +3,7 @@ package com.mygdx.game;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -18,9 +19,8 @@ public class CreditosScreen extends ApplicationAdapter implements Screen {
 
     final TwinBeeJogo game;
 
-    Texture background;
     SpriteBatch batch;
-    Background bk;
+
 
     private String creditsTitle = "Creditos";
     private String namesText = "Alanderson Figueiredo de Lima\nHenrique Giberti Pilo Fernandes\nVitor de Roma Honorio";
@@ -34,8 +34,6 @@ public class CreditosScreen extends ApplicationAdapter implements Screen {
     public CreditosScreen(TwinBeeJogo game) {
         this.game = game;
         batch = new SpriteBatch();
-        background = new Texture("background.png");
-        bk = new Background(background);
     }
 
     @Override
@@ -67,11 +65,11 @@ public class CreditosScreen extends ApplicationAdapter implements Screen {
 
     @Override
     public void render(float delta) {
+        Color backgroundColor = Color.valueOf("#0009AC");
+        Gdx.gl.glClearColor(backgroundColor.r, backgroundColor.g, backgroundColor.b, backgroundColor.a);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         batch.begin();
-        bk.draw(batch);
-        bk.run();
 
         game.font.getRegion().getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
@@ -114,7 +112,6 @@ public class CreditosScreen extends ApplicationAdapter implements Screen {
     @Override
     public void dispose() {
         batch.dispose();
-        background.dispose();
         skin.dispose();
         stage.dispose();
     }
