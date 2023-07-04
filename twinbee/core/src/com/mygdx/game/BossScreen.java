@@ -195,6 +195,10 @@ public class BossScreen extends ApplicationAdapter implements Screen {
             bossMusic.stop();
             game.setScreen(new GameOverScreen(game));
         }
+        if (boss.isMorto() == true){
+            bossMusic.stop();
+            game.setScreen(new GameWinScreen(game));
+        }
 
         batch.end();
     }
