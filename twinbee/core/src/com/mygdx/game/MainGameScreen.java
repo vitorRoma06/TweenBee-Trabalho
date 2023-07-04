@@ -17,6 +17,10 @@ public class MainGameScreen extends ApplicationAdapter implements Screen {
 
     private Texture background;
     private Texture nave;
+    private Texture nave1;
+    private Texture nave2;
+    private Texture nave3;
+    private Texture nave4;
     private Texture tiro1;
     private Texture alien1;
     private Texture alien2;
@@ -65,6 +69,10 @@ public class MainGameScreen extends ApplicationAdapter implements Screen {
         
         background = new Texture("background.png");
         nave = new Texture("nave.png");
+        nave1 = new Texture("player_1.png");
+        nave2 = new Texture("player_2.png");
+        nave3 = new Texture("player_3.png");
+        nave4 = new Texture("player_4.png");
         tiro1 = new Texture("tiro22.png");
         alien1 = new Texture("alien1.png");
         alien2 = new Texture("alien2.png");
@@ -73,7 +81,7 @@ public class MainGameScreen extends ApplicationAdapter implements Screen {
 
         bk = new Background(background);
         tiro = new Projeteis(tiro1, batch, scale, somTiro);
-        player = new Player(nave, tiro);
+        player = new Player(nave, tiro, nave1, nave2, nave3, nave4);
         for (int i = 0; i < 10; i++) {
             tiros[i] = new Projeteis(tiroAlien, batch, scale, somTiro);
             aliens[i] = new Alien(alien1, alien2, alien3, morteNaveSound, tiros[i]);
