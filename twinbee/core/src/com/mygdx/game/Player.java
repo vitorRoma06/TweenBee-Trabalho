@@ -11,9 +11,16 @@ public class Player extends Movel {
     float cooldown;
     Projeteis tiro;
 
-    private int powerup;
+    private Texture nave1;
+    private Texture nave2;
+    private Texture nave3;
+    private Texture nave4;
 
-    public Player(Texture sprite,  Projeteis tiro) {
+    private int powerup;
+    private int spriteNum;
+    private int spriteNum2;
+
+    public Player(Texture sprite,  Projeteis tiro, Texture nave1, Texture nave2, Texture nave3, Texture nave4) {
         vida = 3;
         posX = 400;
         posY = 100;
@@ -23,7 +30,10 @@ public class Player extends Movel {
         this.tiro = tiro;
         alt = sprite.getHeight();
         larg = sprite.getWidth();
-        
+        this.nave1 = nave1;
+        this.nave2 = nave2;
+        this.nave3 = nave3;
+        this.nave4 = nave4;
         
     }
 
@@ -47,7 +57,20 @@ public class Player extends Movel {
             }
             
         }
-        batch.draw(sprite, posX, posY);
+        if(spriteNum % 60 == 0){
+                    spriteNum2++;
+                }
+                if(spriteNum2 % 5 == 0){
+                    batch.draw(sprite, posX, posY,  larg, alt);
+                }else if(spriteNum2 % 5 == 1){
+                    batch.draw(nave1, posX, posY,  larg, alt);
+                }else if(spriteNum2 % 5 == 2){
+                    batch.draw(nave2, posX, posY,  larg, alt);
+                }else if(spriteNum2 % 5 == 3){
+                    batch.draw(nave3, posX, posY,  larg, alt);
+                }else if(spriteNum2 % 5 == 4){
+                    batch.draw(nave4, posX, posY,  larg, alt);
+                }
     }
 
     public int getPosX() {

@@ -17,6 +17,10 @@ public class BossScreen extends ApplicationAdapter implements Screen  {
 
     private Texture background;
     private Texture nave;
+    private Texture nave1;
+    private Texture nave2;
+    private Texture nave3;
+    private Texture nave4;
     private Texture tiro1;
     private Texture alien1;
     private Texture alien2;
@@ -69,12 +73,18 @@ public class BossScreen extends ApplicationAdapter implements Screen  {
         hitSound = Gdx.audio.newSound(Gdx.files.internal("sounds/hitsound.mp3"));
 
         background = new Texture("background.png");
+
         nave = new Texture("nave.png");
+        nave1 = new Texture("player_1.png");
+        nave2 = new Texture("player_2.png");
+        nave3 = new Texture("player_3.png");
+        nave4 = new Texture("player_4.png");
+
         tiro1 = new Texture("tiro22.png");
         alien1 = new Texture("alien1.png");
         alien2 = new Texture("alien2.png");
         alien3 = new Texture("alien3.png");
-        
+
         boss1 = new Texture("boss.png");
         boss2 = new Texture("boss2.png");
         boss2_1 = new Texture("boss2_sprite1.png");
@@ -90,7 +100,7 @@ public class BossScreen extends ApplicationAdapter implements Screen  {
         bk = new Background(background);
         tiro = new Projeteis(tiro1, batch, scale, somTiro);
         bossTiro = new Projeteis(tiroBoss, batch, scale*4, somTiro);
-        player = new Player(nave, tiro);
+        player = new Player(nave, tiro, nave1, nave2, nave3, nave4);
         boss = new Boss(game, boss1, bossTiro, boss2, boss2_1, boss2_2, boss3, boss3_1);
         for (int i = 0; i < 5; i++) {
             tiros[i] = new Projeteis(tiroAlien, batch, scale, somTiro);
