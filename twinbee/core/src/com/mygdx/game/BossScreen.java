@@ -60,7 +60,7 @@ public class BossScreen extends ApplicationAdapter implements Screen  {
     int larg, alt, mortos = 0;
     int posXs[] = new int[10];
     int posYs[] = new int[10];
-    double tempo = 10;
+    double tempo = 0;
     float scale = 2;
     int pont = 0;
     double cooldown = 0;
@@ -138,11 +138,11 @@ public class BossScreen extends ApplicationAdapter implements Screen  {
 
         // olha posições iguais
         if (TimeUtils.nanoTime() / 1000000000 > cooldown + 2) {
-            if (player.posicaoIgual(boss.getPosX(), boss.getPosY(), boss.larg/3, boss.alt) == true) {
+            if (player.posicaoIgual(boss.getPosX(), boss.getPosY()+50, boss.larg/3, boss.alt) == true) {
                 hitSound.play();
                 cooldown = TimeUtils.nanoTime() / 1000000000;
             }
-            if (player.posicaoIgual(bossTiro.getPosX(), bossTiro.getPosY(), bossTiro.larg/2, bossTiro.alt) == true) {
+            if (player.posicaoIgual(bossTiro.getPosX()+20, bossTiro.getPosY()+20, bossTiro.larg/3, bossTiro.alt) == true) {
                 hitSound.play();
                 cooldown = TimeUtils.nanoTime() / 1000000000;
             }
