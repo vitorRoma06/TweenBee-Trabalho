@@ -72,9 +72,6 @@ public class Movel {
         this.morto = morto;
     }
 
-    public boolean colisaoAlien(int posX2, int posY2) {
-        return false;
-    }
 
     public int getVida() {
         return vida;
