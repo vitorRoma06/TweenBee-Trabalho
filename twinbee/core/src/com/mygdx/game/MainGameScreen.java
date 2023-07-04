@@ -113,7 +113,7 @@ public class MainGameScreen extends ApplicationAdapter implements Screen {
             tempo = TimeUtils.nanoTime() / 1000000000;
         }
         // spawna os aliens
-        if (mortos == 10 && TimeUtils.nanoTime() / 1000000000 > tempo + 7) {
+        if (mortos == 10 && TimeUtils.nanoTime() / 1000000000 > tempo + 5) {
             alienSpawn(5, 0);
             alienSpawn(10, 5);
             mortos = 0;
@@ -159,7 +159,7 @@ public class MainGameScreen extends ApplicationAdapter implements Screen {
             }
         }
 
-        if(pont >= 6000){
+        if(pont >= 4000){
             backgroundMusic.stop();
             game.setScreen(new BossScreen(game));
         }
