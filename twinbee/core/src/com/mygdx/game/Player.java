@@ -16,17 +16,15 @@ public class Player extends Movel {
     private Texture nave3;
     private Texture nave4;
 
-    private int powerup;
     private int spriteNum;
     private int spriteNum2;
 
     public Player(Texture sprite,  Projeteis tiro, Texture nave1, Texture nave2, Texture nave3, Texture nave4) {
-        vida = 3;
+        vida = 5;
         posX = 400;
         posY = 100;
         morto = false;
         this.sprite = sprite;
-        powerup = 1;
         this.tiro = tiro;
         alt = sprite.getHeight();
         larg = sprite.getWidth();
