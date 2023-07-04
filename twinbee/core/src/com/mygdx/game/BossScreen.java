@@ -82,7 +82,7 @@ public class BossScreen extends ApplicationAdapter implements Screen  {
         bossTiro = new Projeteis(tiroBoss, batch, scale*4, somTiro);
         player = new Player(nave, tiro);
         boss = new Boss(game, boss1, bossTiro, boss2);
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 5; i++) {
             tiros[i] = new Projeteis(tiroAlien, batch, scale, somTiro);
             aliens[i] = new Alien(alien1, alien2, alien3, morteNaveSound, tiros[i]);
         }
