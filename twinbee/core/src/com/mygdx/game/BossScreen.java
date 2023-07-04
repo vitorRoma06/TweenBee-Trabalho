@@ -122,7 +122,7 @@ public class BossScreen extends ApplicationAdapter implements Screen {
         batch.begin();
         bk.draw(batch);
         bk.run();
-        game.font.draw(batch, "Pontuação: " + pont, 30, 550);
+        game.font.draw(batch, "Pontuacao: " + pont, 30, 550);
         game.font.draw(batch, "Vida: " + player.vida, 30, 520);
         game.font.draw(batch, "Tempo: " + (TimeUtils.nanoTime() / 1000000000 - temp), 700, 550);
         for (int i = 0; i < 30; i++) {
