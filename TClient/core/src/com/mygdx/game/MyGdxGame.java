@@ -55,22 +55,29 @@ public class MyGdxGame extends ApplicationAdapter {
 			batch.begin();
 
 			// olha qual vai ser a variável
-			message = "";
+			message = "a;";
 			if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
-				message = "up";
+				message = "up;";
 				System.out.println("mandou cima");
 			}
 			if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-				message = "left";
+				message = "left;";
 				System.out.println("mandou esquerda");
 			}
 			if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-				message = "down";
+				message = "down;";
 				System.out.println("mandou baixo");
 			}
 			if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-				message = "right";
+				message = "right;";
 				System.out.println("mandou direita");
+			}
+
+			if (Gdx.input.isKeyPressed(Input.Keys.SPACE)){
+				message = message + "space;";
+				System.out.println("mandou espaço");
+			}else {
+				message = message + "a;";
 			}
 
 			// envia

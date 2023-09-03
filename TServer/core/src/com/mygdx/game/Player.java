@@ -22,6 +22,7 @@ public class Player extends Movel {
     // server
     int num;
     String message;
+    String message2 ="a";
 
     public Player(Texture sprite, Projeteis tiro, Texture nave1, Texture nave2, Texture nave3, Texture nave4, int num) {
         vida = 10;
@@ -36,12 +37,14 @@ public class Player extends Movel {
         this.nave2 = nave2;
         this.nave3 = nave3;
         this.nave4 = nave4;
+        this.num = num;
 
     }
 
     @Override
     public void draw(SpriteBatch batch) {
-        if (Gdx.input.isKeyPressed(Input.Keys.W) && posY < (600 - sprite.getHeight())) {
+        if(num == 0){
+            if (Gdx.input.isKeyPressed(Input.Keys.W) && posY < (600 - sprite.getHeight())) {
             posY = posY + 5;
         }
         if (Gdx.input.isKeyPressed(Input.Keys.A) && posX > 0) {
@@ -53,6 +56,8 @@ public class Player extends Movel {
         if (Gdx.input.isKeyPressed(Input.Keys.D) && posX < (800 - sprite.getWidth())) {
             posX = posX + 5;
         }
+        }
+        
 
         //player online
         if (num == 1) {
@@ -80,14 +85,23 @@ public class Player extends Movel {
             }
         }
 
-        if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
+        if (Gdx.input.isKeyPressed(Input.Keys.SPACE) && num == 0) {
             if (tiro.isMorto() == true && TimeUtils.nanoTime() / 1000000 > (cooldown) + 500) {
                 tiro.setMorto(false);
                 tiro.setPos(posX, posY, sprite.getHeight(), sprite.getWidth());
                 cooldown = TimeUtils.nanoTime() / 1000000;
             }
-
         }
+
+        //player2
+        if(message2.equals("space") && num == 1){
+            if (tiro.isMorto() == true && TimeUtils.nanoTime() / 1000000 > (cooldown) + 500) {
+                tiro.setMorto(false);
+                tiro.setPos(posX, posY, sprite.getHeight(), sprite.getWidth());
+                cooldown = TimeUtils.nanoTime() / 1000000;
+            }
+        }
+
         if (spriteNum % 60 == 0) {
             spriteNum2++;
         }
@@ -112,8 +126,9 @@ public class Player extends Movel {
         return posY;
     }
 
-    public void setMessage(String message) {
+    public void setMessage(String message, String message2) {
         this.message = message;
+        this.message2 = message2;
     }
 
 }

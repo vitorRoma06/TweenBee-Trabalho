@@ -36,6 +36,8 @@ public class MainGameScreen extends ApplicationAdapter implements Screen {
     private Texture alien3;
     private Texture tiroAlien;
 
+    private Texture navep2;
+
     private Music backgroundMusic;
 
     private Sound morteNaveSound;
@@ -45,6 +47,7 @@ public class MainGameScreen extends ApplicationAdapter implements Screen {
     private Movel player;
     private Movel player2;
     private Projeteis tiro;
+    private Projeteis tirop2;
     public SpriteBatch batch;
     private Background bk;
 
@@ -69,7 +72,7 @@ public class MainGameScreen extends ApplicationAdapter implements Screen {
     Socket clientSocket;
     ObjectOutputStream output;
     ObjectInputStream input;
-    private String message ="";
+    private String message = "";
 
     public MainGameScreen(TwinBeeJogo game) {
         this.game = game;
@@ -100,17 +103,19 @@ public class MainGameScreen extends ApplicationAdapter implements Screen {
         nave2 = new Texture("player_2.png");
         nave3 = new Texture("player_3.png");
         nave4 = new Texture("player_4.png");
+        navep2 = new Texture("alien1.png");
         tiro1 = new Texture("tiro22.png");
         alien1 = new Texture("alien1.png");
         alien2 = new Texture("alien2.png");
         alien3 = new Texture("alien3.png");
         tiroAlien = new Texture("tiroAlien_1.png");
-
+        
         bk = new Background(background);
         tiro = new Projeteis(tiro1, batch, scale, somTiro);
         player = new Player(nave, tiro, nave1, nave2, nave3, nave4, 0);
-        //player online
-        player2 = new Player(nave, tiro, nave1, nave2, nave3, nave4, 1);
+        // player online
+        tirop2 = new Projeteis(tiro1, batch, scale, somTiro);
+        player2 = new Player(nave, tirop2, nave1, nave2, nave3, nave4, 1);
 
         for (int i = 0; i < 10; i++) {
             tiros[i] = new Projeteis(tiroAlien, batch, scale, somTiro);
@@ -129,22 +134,23 @@ public class MainGameScreen extends ApplicationAdapter implements Screen {
         game.font.draw(batch, "Vida: " + player.vida, 30, 520);
         game.font.draw(batch, "Tempo: " + (TimeUtils.nanoTime() / 1000000000 - temp), 700, 550);
         tiro.draw(batch);
+        tirop2.draw(batch);
         player.draw(batch);
 
-        //recebe o input
+        // recebe o input
         try {
             message = (String) input.readObject();
             String response = "Mensagem recebida: " + message;
             output.writeObject(response);
             output.flush();
+            System.out.println("aaaaaaaaaaaaaaaa" + message);
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
-        System.out.println(message);
-
-        //player online
-        ((Player) player2).setMessage(message);
-        player2.draw(batch);
+        // player online
+        String[] tecla = message.split(";");
+        ((Player) player2).setMessage(tecla[0],tecla[1]);
+        ((Player)player2).draw(batch);
         mortos = 0;
 
         // ve se aliens estão mortos
@@ -175,6 +181,11 @@ public class MainGameScreen extends ApplicationAdapter implements Screen {
             if (aliens[i].posicaoIgual(tiro.getPosX(), tiro.getPosY(), 35, 35) == true) {
                 pont = pont + 100;
                 tiro.setMorto(true);
+            }
+            //player2
+            if (aliens[i].posicaoIgual(tirop2.getPosX(), tirop2.getPosY(), 35, 35) == true) {
+                pont = pont + 100;
+                tirop2.setMorto(true);
             }
 
             if (TimeUtils.nanoTime() / 1000000000 > cooldown + 2) {
