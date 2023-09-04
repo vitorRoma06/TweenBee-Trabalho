@@ -12,14 +12,13 @@ public class Movel {
     public boolean morto;
     private Sound morte;
     private int tipo=10;
-    private Texture sprite;
+    protected Texture sprite;
     
-    public Movel(int posX, int posY, int larg, int alt, Sound morte) {
+    public Movel(int posX, int posY, int larg, int alt) {
         this.posX = posX;
         this.posY = posY;
         this.larg = larg;
         this.alt = alt;
-        this.morte = morte;
     }
 
     public void setPosX(int posX) {
