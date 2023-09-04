@@ -73,6 +73,7 @@ public class MainGameScreen extends ApplicationAdapter implements Screen {
     ObjectOutputStream output;
     ObjectInputStream input;
     private String message = "";
+    private String vari = ",,,,,,,,,,,,,,,,,,,,";//tem 20 aqui
 
     public MainGameScreen(TwinBeeJogo game) {
         this.game = game;
@@ -140,9 +141,6 @@ public class MainGameScreen extends ApplicationAdapter implements Screen {
         // recebe o input
         try {
             message = (String) input.readObject();
-            String response = "Mensagem recebida: " + message;
-            output.writeObject(response);
-            output.flush();
             System.out.println("aaaaaaaaaaaaaaaa" + message);
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
@@ -197,8 +195,34 @@ public class MainGameScreen extends ApplicationAdapter implements Screen {
                     hitSound.play();
                     tiros[i].setMorto(true);
                 }
+                //player2
+                if (player2.posicaoIgual(aliens[i].getPosX(), aliens[i].getPosY(), 40, 35) == true) {
+                    cooldown = TimeUtils.nanoTime() / 1000000000;
+                    hitSound.play();
+                } else if (player2.posicaoIgual(tiros[i].getPosX(), tiros[i].getPosY(), 35, 35) == true) {
+                    cooldown = TimeUtils.nanoTime() / 1000000000;
+                    hitSound.play();
+                    tiros[i].setMorto(true);
+                }
             }
 
+        }
+
+        //manda os trem pro clientside
+        try {
+            vari ="";
+            for(int i = 0 ; i < 10; i++){
+                vari += aliens[i].getPosX() + ";"+aliens[i].getPosY()+";"+aliens[i].getTipo()+";";//trem dos aliens
+                vari += tiros[i].getPosX() + ";"+tiros[i].getPosY()+";";//tiros deles
+            }//o for para no 49 item (50 ao todo)
+            vari += player.getPosX() + ";"+player.getPosY() + ";"+player.getVida() + ";"; //52 (53)
+            vari += player2.getPosX() + ";"+player2.getPosY() + ";"+player2.getVida() + ";"; //55 (56)
+            vari += tiro.getPosX() + ";"+tiro.getPosY() + ";"+ tirop2.getPosX()+";"+tirop2.getPosY() + ";"; //59 (60)
+
+            output.writeObject(vari);
+			output.flush();
+        } catch (IOException e) {
+            
         }
 
         // ve se player morreu
@@ -219,6 +243,8 @@ public class MainGameScreen extends ApplicationAdapter implements Screen {
             backgroundMusic.stop();
             game.setScreen(new BossScreen(game));
         }
+
+
 
         batch.end();
 
